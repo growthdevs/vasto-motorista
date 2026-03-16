@@ -38,6 +38,21 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    --alert-success: 160 60% 45%;
+    --alert-success-bg: 152 81% 96%;
+    --alert-success-border: 152 69% 85%;
+    --alert-warning: 38 92% 50%;
+    --alert-warning-bg: 48 96% 95%;
+    --alert-warning-border: 45 93% 83%;
+    --alert-error: 0 84% 60%;
+    --alert-error-bg: 0 86% 97%;
+    --alert-error-border: 0 74% 88%;
+    --alert-info: 217 91% 60%;
+    --alert-info-bg: 214 95% 96%;
+    --alert-info-border: 213 94% 88%;
+    --alert-text: 220 13% 8%;
+    --alert-text-muted: 220 9% 36%;
+
     --sidebar-background: 0 0% 98%;
 
     --sidebar-foreground: 240 5.3% 26.1%;
