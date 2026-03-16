@@ -47,6 +47,17 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        "vasto-primario": {
+          300: "hsl(var(--vasto-primario-300))",
+          DEFAULT: "hsl(var(--vasto-primario))",
+          700: "hsl(var(--vasto-primario-700))",
+          800: "hsl(var(--vasto-primario-800))",
+        },
+        "vasto-secundario": {
+          300: "hsl(var(--vasto-secundario-300))",
+          DEFAULT: "hsl(var(--vasto-secundario))",
+          700: "hsl(var(--vasto-secundario-700))",
+        },
         "alert-success": {
           DEFAULT: "hsl(var(--alert-success))",
           bg: "hsl(var(--alert-success-bg))",
@@ -66,6 +77,11 @@ export default {
           DEFAULT: "hsl(var(--alert-info))",
           bg: "hsl(var(--alert-info-bg))",
           border: "hsl(var(--alert-info-border))",
+        },
+        "alert-question": {
+          DEFAULT: "hsl(var(--alert-question))",
+          bg: "hsl(var(--alert-question-bg))",
+          border: "hsl(var(--alert-question-border))",
         },
         "alert-text": {
           DEFAULT: "hsl(var(--alert-text))",
