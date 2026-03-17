@@ -1,0 +1,153 @@
+Autenticação (App)
+
+    Login por email/telefone + senha.
+
+    Recuperação e redefinição de senha.
+
+    Autenticação via Firebase Auth.
+
+Cadastro — Etapa 1
+
+Realizado antes de acessar o app.
+
+    Dados exigidos:
+
+        Nome
+
+        CPF
+
+        Telefone
+
+        Placa do veículo
+
+        Senha
+
+        Aceite dos Termos de Uso
+
+Observações:
+
+    Cria a carteira digital do motorista.
+
+    Motorista ainda não pode transacionar até concluir a Etapa 2.
+
+Cadastro — Etapa 2
+
+Realizado após login.
+
+    O app deve lembrar o motorista na Home e ao tentar acessar funções restritas.
+
+Dados exigidos:
+
+    Endereço completo
+
+    RENAVAM
+
+    Cópia da CNH
+
+    Comprovante de residência
+
+    Dados bancários
+
+    Foto de perfil
+
+Observações:
+
+    Sem a Etapa 2 o motorista não pode:
+
+        Solicitar pagamentos
+
+        Solicitar despesas adicionais
+
+Home
+
+A Home deve exibir:
+
+    Saldo da carteira
+
+    Atalhos de navegação
+
+    Fretes recentes com status
+
+    Notificações importantes (ex: Cadastro Etapa 2 pendente)
+
+Solicitação de Pagamento
+
+    Motorista pode transferir valores da carteira para conta pessoal via PIX.
+
+    Pode ser valor total ou parcial.
+
+    Sempre há taxa administrativa.
+
+Extrato Financeiro (App)
+
+    Histórico de transações do motorista.
+
+    Filtros por período e datas até 90 dias.
+
+    Itens exibidos:
+
+        Créditos de fretes
+
+        Créditos de despesas adicionais
+
+        Saques
+
+        Taxas
+
+Meus Fretes
+
+    Lista completa de fretes:
+
+        Em andamento
+
+        Concluídos
+
+        Cancelados
+
+    Cada frete deve mostrar:
+
+        Valor
+
+        Status
+
+        Código identificador do frete
+
+        Origem e Destino
+
+        Opção de solicitar despesa adicional (quando em andamento)
+
+Solicitação de Despesa Adicional
+
+    Realizada dentro de um frete em andamento.
+
+    Motorista deve informar:
+
+        Motivo
+
+        Valor
+
+        Anexos (opcionais)
+
+    App deve permitir consultar solicitações anteriores e seus status.
+
+    Em caso de reprovação, mostrar motivo enviado pela empresa.
+
+    Motorista pode solicitar quantas vezes quiser, mas deve haver orientação de boas práticas.
+
+Manutenção da Conta
+
+Motorista pode:
+
+    Atualizar dados de contato (com confirmação)
+
+    Alterar email (com confirmação)
+
+    Alterar foto de perfil
+
+Contato e Suporte (App)
+
+    Tela com FAQ
+
+    Formulário de contato
+
+    Telefones da central

@@ -1,75 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* VASTO Brand - Primárias (Preto) */
     --vasto-primario-300: 0 0% 29%;
     --vasto-primario: 0 0% 15%;
     --vasto-primario-700: 0 0% 11%;
     --vasto-primario-800: 0 0% 0%;
-
-    /* VASTO Brand - Secundárias (Amarelo) */
     --vasto-secundario-300: 47 100% 80%;
     --vasto-secundario: 47 100% 60%;
     --vasto-secundario-700: 47 100% 45%;
-
-    /* VASTO Semânticos */
     --background: 0 0% 98%;
     --foreground: 0 0% 13%;
-
     --card: 0 0% 100%;
     --card-foreground: 0 0% 13%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
-
-    --primary: 0 0% 15%;
-    --primary-foreground: 0 0% 98%;
-
-    --secondary: 47 100% 60%;
-    --secondary-foreground: 0 0% 13%;
-
+    --primary: 50 100% 60%;
+    --primary-foreground: 0 0% 13%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 100%;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-
-    --accent: 47 100% 94%;
+    --accent: 50 100% 95%;
     --accent-foreground: 0 0% 13%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 47 100% 60%;
-
+    --ring: 50 100% 60%;
     --radius: 0.75rem;
-
-    /* Alert semantic colors */
     --alert-success: 142 72% 29%;
     --alert-success-bg: 138 76% 97%;
     --alert-success-border: 142 69% 90%;
-
     --alert-warning: 38 92% 50%;
     --alert-warning-bg: 48 96% 95%;
     --alert-warning-border: 45 93% 83%;
-
     --alert-error: 0 72% 51%;
     --alert-error-bg: 0 100% 97%;
     --alert-error-border: 0 93% 94%;
-
     --alert-info: 217 91% 53%;
     --alert-info-bg: 214 100% 97%;
     --alert-info-border: 213 93% 93%;
-
     --alert-question: 47 100% 60%;
     --alert-question-bg: 47 100% 94%;
     --alert-question-border: 47 100% 80%;
-
     --alert-text: 0 0% 13%;
     --alert-text-muted: 0 0% 45%;
-
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -81,25 +61,25 @@
   }
 
   .dark {
-    --background: 0 0% 7%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 10%;
+    --card: 0 0% 13%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 10%;
+    --popover: 0 0% 13%;
     --popover-foreground: 0 0% 98%;
-    --primary: 47 100% 60%;
-    --primary-foreground: 0 0% 7%;
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --primary: 50 100% 60%;
+    --primary-foreground: 0 0% 13%;
+    --secondary: 0 0% 98%;
+    --secondary-foreground: 0 0% 13%;
     --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
+    --muted-foreground: 0 0% 65%;
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 47 100% 60%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 50 100% 60%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -118,7 +98,35 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .page-transition {
+    @apply animate-in fade-in slide-in-from-right-4 duration-300;
+  }
+
+  .input-ionic {
+    @apply h-14 rounded-xl border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply h-14 rounded-xl bg-secondary text-primary font-bold disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white transition-all active:scale-[0.98] disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply h-14 rounded-xl bg-white text-secondary font-bold disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-white transition-all active:scale-[0.98] disabled:active:scale-100;
+  }
+
+  .btn-disabled {
+    @apply h-14 cursor-not-allowed rounded-xl bg-gray-300 text-white font-bold;
+  }
+
+  .link-yellow {
+    @apply font-bold text-primary transition-opacity active:opacity-80;
   }
 }
 
