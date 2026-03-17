@@ -289,7 +289,7 @@ export default function FreightsList() {
                    </div>
 
                    {/* Stops Indicator (if any) */}
-                   {freight.stops && freight.stops.length > 0 && (
+                   {'stops' in freight && freight.stops && (freight.stops as any[]).length > 0 && (
                      <div className="relative flex items-center gap-3">
                         <div className="h-8 w-8 flex items-center justify-center shrink-0 relative z-10">
                            <div className="h-2 w-2 rounded-full bg-gray-300"></div>
@@ -299,7 +299,7 @@ export default function FreightsList() {
                           className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
                         >
                            <span className="text-xs font-bold text-gray-600">
-                             + {freight.stops.length - 2} paradas
+                             + {(freight.stops as any[]).length - 2} paradas
                            </span>
                            <ChevronDown size={12} className="text-gray-400" />
                         </button>
