@@ -9,7 +9,7 @@ import Login from "@/pages/auth/login";
 import RegisterStep1 from "@/pages/auth/register-step-1";
 import RegisterStep2 from "@/pages/auth/register-step-2";
 import Recovery from "@/pages/auth/recovery";
-import Home from "@/pages/home";
+import Home from "@/pages/Home";
 import FreightsList from "@/pages/freights/list";
 import FreightExpenses from "@/pages/freights/expenses";
 import NewExpense from "@/pages/freights/new-expense";
