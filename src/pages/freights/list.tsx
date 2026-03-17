@@ -162,7 +162,7 @@ export default function FreightsList() {
       const query = searchQuery.toLowerCase();
       const matchesOrigin = f.origin.toLowerCase().includes(query);
       const matchesDestination = f.destination.toLowerCase().includes(query);
-      const matchesStops = f.stops && f.stops.some((stop: any) => stop.address.toLowerCase().includes(query));
+      const matchesStops = 'stops' in f && f.stops && (f.stops as any[]).some((stop: any) => stop.address.toLowerCase().includes(query));
       
       if (!matchesOrigin && !matchesDestination && !matchesStops) return false;
     }
