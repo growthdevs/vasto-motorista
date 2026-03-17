@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound.tsx";
 import RecuperarSenha from "./pages/RecuperarSenha.tsx";
 import Cadastro from "./pages/Cadastro.tsx";
 import AlertsDemo from "./pages/AlertsDemo.tsx";
+import Home from "./pages/Home.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/recuperar-senha" element={<RecuperarSenha />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/alerts" element={<AlertsDemo />} />

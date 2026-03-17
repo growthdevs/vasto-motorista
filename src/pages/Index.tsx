@@ -117,7 +117,10 @@ const Index = () => {
             </div>
 
             {/* Login button */}
-            <button className="w-full py-4 rounded-full bg-[#252525] text-[#ffdb33] font-semibold text-base mb-4">
+            <button
+              onClick={() => navigate("/home")}
+              className="w-full py-4 rounded-full bg-[#252525] text-[#ffdb33] font-semibold text-base mb-4"
+            >
               Acessar conta
             </button>
 
