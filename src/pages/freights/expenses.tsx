@@ -18,7 +18,7 @@ import { useState } from "react";
 export default function FreightExpenses() {
   const [, setLocation] = useLocation();
   const [match, params] = useRoute("/freights/:id/expenses");
-  const freightId = params?.id ?? "FRT-9021";
+  const freightId = (params as { id: string } | null)?.id || "FRT-9021";
 
   // Mock data - In a real app, verify if the freight is active
   const freight = {
