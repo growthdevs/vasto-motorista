@@ -328,11 +328,11 @@ export default function Home() {
 
               {/* Ver carteira button */}
               <Link href="/wallet">
-                <button className="w-full bg-primary text-secondary font-bold text-sm py-2.5 rounded-xl active:scale-[0.98] transition-transform">
-                  Ver carteira
-                </button>
+                <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer group flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-400">Ver carteira</span>
+                  <ChevronRight size={16} className="text-gray-400 group-active:translate-x-0.5 transition-transform" />
+                </div>
               </Link>
-            </div>
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
             <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
           </div>
