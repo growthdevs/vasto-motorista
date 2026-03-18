@@ -154,8 +154,8 @@ export default function WalletPage() {
               { id: "FRT-8650", value: 1530, days: 10, date: "22 Mar 2026" },
             ].map((item) => (
               <div key={item.id} className="bg-muted rounded-2xl p-4 flex items-center gap-4 border border-border">
-                <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center shrink-0">
-                  <Clock size={18} className="text-primary" />
+                <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                  <Clock size={18} className="text-secondary" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-secondary">{item.id}</p>

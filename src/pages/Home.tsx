@@ -463,9 +463,9 @@ export default function Home() {
 
                    {/* Destination */}
                    <div className="relative flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-full bg-yellow-50 flex items-center justify-center shrink-0 mt-1 relative z-10">
-                         <MapPin size={16} className="text-yellow-600 fill-yellow-600" />
-                      </div>
+                       <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center shrink-0 mt-1 relative z-10">
+                          <MapPin size={16} className="text-primary fill-primary" />
+                       </div>
                       <div>
                          <p className="text-xs text-gray-400 font-medium mb-0.5">Entrega</p>
                         <p className="text-sm font-bold text-secondary leading-tight">
