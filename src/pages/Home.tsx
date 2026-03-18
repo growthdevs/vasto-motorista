@@ -291,7 +291,8 @@ export default function Home() {
         <section className="px-6">
           <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden">
             <div className="relative z-10">
-              <div className="flex justify-end items-center mb-4">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm font-semibold text-gray-400">Sua carteira</span>
                 <div className="flex items-center gap-3">
                   <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
                     {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
