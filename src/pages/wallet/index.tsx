@@ -37,15 +37,17 @@ export default function WalletPage() {
       <main className="space-y-6 pt-2">
         {/* Total Card */}
         <section className="px-6">
-          <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground relative overflow-hidden">
+          <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden">
             <div className="relative z-10">
-              <div className="flex justify-between items-start mb-4">
-                <span className="text-gray-400 text-sm font-medium">Saldo total</span>
-                <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm font-semibold text-gray-400">Seus saldos</span>
+                <div className="flex items-center gap-3">
+                  <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
+                    {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
+                  </button>
+                  <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
+                </div>
               </div>
-              <h2 className="text-3xl font-bold text-primary mb-6">
-                {showBalance ? formatCurrency(totalGeral) : hiddenValue}
-              </h2>
 
               {/* Two balances */}
               <div className="grid grid-cols-2 gap-3">
