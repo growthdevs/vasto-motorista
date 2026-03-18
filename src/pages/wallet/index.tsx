@@ -27,11 +27,7 @@ export default function WalletPage() {
           <ArrowLeft size={24} className="text-secondary" />
         </button>
         <h1 className="text-xl font-bold text-secondary">Carteira</h1>
-        <div className="ml-auto">
-          <button onClick={() => setShowBalance(!showBalance)} className="text-muted-foreground hover:text-secondary transition-colors p-1">
-            {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
-          </button>
-        </div>
+        <div className="ml-auto" />
       </header>
 
       <main className="space-y-6 pt-2">
