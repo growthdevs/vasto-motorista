@@ -333,6 +333,7 @@ export default function Home() {
                   <ChevronRight size={16} className="text-gray-400 group-active:translate-x-0.5 transition-transform" />
                 </div>
               </Link>
+            </div>
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
             <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
           </div>
