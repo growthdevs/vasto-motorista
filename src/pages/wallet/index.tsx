@@ -79,20 +79,20 @@ export default function WalletPage() {
 
         {/* Anticipation CTA */}
         <section className="px-6">
-          <div className="bg-accent rounded-2xl p-5 border border-primary/20">
+          <div className="bg-gray-50 rounded-2xl p-5 border border-gray-200">
             <div className="flex items-start gap-3 mb-3">
-              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center shrink-0">
-                <Zap size={20} className="text-primary-foreground" />
+              <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                <Zap size={20} className="text-primary" />
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-secondary text-sm">Antecipe e receba hoje</h3>
-                <p className="text-xs text-muted-foreground mt-0.5">
+                <p className="text-xs text-gray-500 mt-0.5">
                   Você pode antecipar{" "}
                   <span className="font-bold text-secondary">
                     {showBalance ? formatCurrency(saldoALiberar) : "••••"}
                   </span>{" "}
                   e receber{" "}
-                  <span className="font-bold text-primary">
+                  <span className="font-bold text-secondary">
                     {showBalance ? formatCurrency(valorAntecipavelLiquido) : "••••"}
                   </span>{" "}
                   agora.
