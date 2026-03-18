@@ -22,7 +22,8 @@ import {
   Shield,
   CheckCircle2,
   Info,
-  MapPin
+  MapPin,
+  Clock
 } from "lucide-react";
 import { useState } from "react";
 import vastoLogoBlack from "@assets/vasto-logo-black_1765408289648.png";

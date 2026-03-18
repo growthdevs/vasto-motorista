@@ -24,6 +24,9 @@ import Terms from "@/pages/terms";
 import Help from "@/pages/help";
 import Settings from "@/pages/settings";
 import Extract from "@/pages/financial/extract";
+import WalletPage from "@/pages/wallet";
+import ReleaseSchedule from "@/pages/wallet/release-schedule";
+import Anticipate from "@/pages/wallet/anticipate";
 
 function Router() {
   return (
@@ -34,6 +37,9 @@ function Router() {
       <Route path="/register/step-2" component={RegisterStep2} />
       <Route path="/recovery" component={Recovery} />
       <Route path="/home" component={Home} />
+      <Route path="/wallet" component={WalletPage} />
+      <Route path="/wallet/release-schedule" component={ReleaseSchedule} />
+      <Route path="/wallet/anticipate" component={Anticipate} />
       <Route path="/transfer" component={Transfer} />
       <Route path="/extract" component={Extract} />
       <Route path="/profile" component={Profile} />
