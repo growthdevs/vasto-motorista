@@ -1,17 +1,17 @@
 import { Link, useLocation } from "wouter";
-import { 
-  ArrowLeft, 
-  ArrowUpRight, 
-  ArrowDownLeft, 
-  Filter, 
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Filter,
   Calendar as CalendarIcon,
   AlertTriangle,
   Eye,
   EyeOff,
   Share2,
   X,
-  FileText
-} from "lucide-react";
+  FileText } from
+"lucide-react";
 import { useState } from "react";
 import { Drawer } from "vaul";
 import { differenceInDays, format, subDays } from "date-fns";
@@ -20,8 +20,8 @@ import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+  PopoverTrigger } from
+"@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import vastoLogoYellow from "@assets/vasto-logo-yellow_1765408289648.png";
 import { useToast } from "@/hooks/use-toast";
@@ -44,94 +44,94 @@ export default function Extract() {
 
   // Mock transactions
   const allTransactions = [
-    {
-      id: "TRX-1001",
-      type: "credit",
-      description: "Pagamento Frete FRT-8820",
-      entity: "Logística Brasil Ltda",
-      date: new Date(), // Hoje
-      amount: "R$ 1.100,00",
-      status: "Concluído"
-    },
-    {
-      id: "TRX-1002",
-      type: "debit",
-      description: "Transferência Pix",
-      entity: "Jackson Five",
-      date: subDays(new Date(), 1), // Ontem
-      amount: "R$ 350,00",
-      status: "Concluído"
-    },
-    {
-      id: "TRX-1003",
-      type: "credit",
-      description: "Reembolso Despesa #402",
-      entity: "FastCargo Transportes",
-      date: subDays(new Date(), 2),
-      amount: "R$ 45,50",
-      status: "Concluído"
-    },
-    {
-      id: "TRX-1004",
-      type: "debit",
-      description: "Taxa de Transferência",
-      entity: "VASTO Pagamentos",
-      date: subDays(new Date(), 1),
-      amount: "R$ 35,00",
-      status: "Concluído"
-    },
-    {
-      id: "TRX-1005",
-      type: "credit",
-      description: "Pagamento Frete FRT-8100",
-      entity: "FastCargo Transportes",
-      date: subDays(new Date(), 5),
-      amount: "R$ 350,00",
-      status: "Concluído"
-    },
-    ...Array.from({ length: 10 }).map((_, i) => ({
-      id: `TRX-${2000 + i}`,
-      type: i % 3 === 0 ? "debit" : "credit",
-      description: i % 3 === 0 ? "Transferência Pix" : `Pagamento Frete FRT-${7000+i}`,
-      entity: i % 3 === 0 ? "Jackson Five" : "Transportadora Exemplo",
-      date: subDays(new Date(), 10 + i),
-      amount: `R$ ${200 + (i * 50)},00`,
-      status: "Concluído"
-    }))
-  ];
+  {
+    id: "TRX-1001",
+    type: "credit",
+    description: "Pagamento Frete FRT-8820",
+    entity: "Logística Brasil Ltda",
+    date: new Date(), // Hoje
+    amount: "R$ 1.100,00",
+    status: "Concluído"
+  },
+  {
+    id: "TRX-1002",
+    type: "debit",
+    description: "Transferência Pix",
+    entity: "Jackson Five",
+    date: subDays(new Date(), 1), // Ontem
+    amount: "R$ 350,00",
+    status: "Concluído"
+  },
+  {
+    id: "TRX-1003",
+    type: "credit",
+    description: "Reembolso Despesa #402",
+    entity: "FastCargo Transportes",
+    date: subDays(new Date(), 2),
+    amount: "R$ 45,50",
+    status: "Concluído"
+  },
+  {
+    id: "TRX-1004",
+    type: "debit",
+    description: "Taxa de Transferência",
+    entity: "VASTO Pagamentos",
+    date: subDays(new Date(), 1),
+    amount: "R$ 35,00",
+    status: "Concluído"
+  },
+  {
+    id: "TRX-1005",
+    type: "credit",
+    description: "Pagamento Frete FRT-8100",
+    entity: "FastCargo Transportes",
+    date: subDays(new Date(), 5),
+    amount: "R$ 350,00",
+    status: "Concluído"
+  },
+  ...Array.from({ length: 10 }).map((_, i) => ({
+    id: `TRX-${2000 + i}`,
+    type: i % 3 === 0 ? "debit" : "credit",
+    description: i % 3 === 0 ? "Transferência Pix" : `Pagamento Frete FRT-${7000 + i}`,
+    entity: i % 3 === 0 ? "Jackson Five" : "Transportadora Exemplo",
+    date: subDays(new Date(), 10 + i),
+    amount: `R$ ${200 + i * 50},00`,
+    status: "Concluído"
+  }))];
+
 
   const handleDateChange = (type: 'start' | 'end', date: Date | undefined) => {
     let newStart = type === 'start' ? date : startDate;
     let newEnd = type === 'end' ? date : endDate;
-    
-    if (type === 'start') setStartDate(date);
-    else setEndDate(date);
+
+    if (type === 'start') setStartDate(date);else
+    setEndDate(date);
 
     if (newStart && newEnd) {
-        const diff = differenceInDays(newEnd, newStart);
-        
-        if (diff < 0) {
-            setDateError("A data final deve ser posterior à inicial");
-        } else if (diff > 90) {
-            setDateError("O período máximo é de 90 dias");
-        } else {
-            setDateError("");
-        }
-    } else {
+      const diff = differenceInDays(newEnd, newStart);
+
+      if (diff < 0) {
+        setDateError("A data final deve ser posterior à inicial");
+      } else if (diff > 90) {
+        setDateError("O período máximo é de 90 dias");
+      } else {
         setDateError("");
+      }
+    } else {
+      setDateError("");
     }
   };
 
-  const filteredTransactions = allTransactions.filter(t => {
+  const filteredTransactions = allTransactions.filter((t) => {
     // Type Filter
     if (activeFilter === "credit" && t.type !== "credit") return false;
     if (activeFilter === "debit" && t.type !== "debit") return false;
 
     // Date Range Filter (Mock logic)
     if (startDate && endDate && !dateError) {
-       // In a real app, compare t.date with range
-       // For mock purposes, if a specific range is set, we'll just filter slightly to simulate
-       return true;
+      // In a real app, compare t.date with range
+      // For mock purposes, if a specific range is set, we'll just filter slightly to simulate
+      return true;
     }
 
     return true;
@@ -154,7 +154,7 @@ export default function Extract() {
         <div className="bg-secondary rounded-2xl p-6 text-white shadow-lg relative overflow-hidden mb-6">
           <div className="relative z-10">
             <div className="flex justify-between items-start mb-2">
-              <span className="text-gray-400 text-sm font-medium">Saldo em carteira</span>
+              <span className="text-gray-400 text-sm font-medium">Saldo disponível</span>
               <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
             </div>
             
@@ -177,34 +177,34 @@ export default function Extract() {
         <div className="flex items-center gap-2">
             <div className="flex-1 flex gap-2 overflow-x-auto scrollbar-hide">
               {[
-                { id: "all", label: "Todos" },
-                { id: "credit", label: "Entradas" },
-                { id: "debit", label: "Saídas" }
-              ].map((filter) => (
-                <button
-                  key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
-                    activeFilter === filter.id
-                      ? "bg-secondary text-primary shadow-md shadow-secondary/10"
-                      : "bg-gray-50 text-gray-500 hover:bg-gray-100"
-                  }`}
-                >
+            { id: "all", label: "Todos" },
+            { id: "credit", label: "Entradas" },
+            { id: "debit", label: "Saídas" }].
+            map((filter) =>
+            <button
+              key={filter.id}
+              onClick={() => setActiveFilter(filter.id)}
+              className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all ${
+              activeFilter === filter.id ?
+              "bg-secondary text-primary shadow-md shadow-secondary/10" :
+              "bg-gray-50 text-gray-500 hover:bg-gray-100"}`
+              }>
+              
                   {filter.label}
                 </button>
-              ))}
+            )}
             </div>
             
             <div className="w-px h-6 bg-gray-200 mx-1"></div>
 
-            <button 
-              onClick={() => setIsFilterOpen(true)}
-              className={`h-9 px-3 rounded-full flex items-center justify-center transition-all gap-2 ${
-                startDate && endDate 
-                  ? "bg-secondary text-primary shadow-md shadow-secondary/10" 
-                  : "bg-gray-50 text-gray-500 hover:bg-gray-100"
-              }`}
-            >
+            <button
+            onClick={() => setIsFilterOpen(true)}
+            className={`h-9 px-3 rounded-full flex items-center justify-center transition-all gap-2 ${
+            startDate && endDate ?
+            "bg-secondary text-primary shadow-md shadow-secondary/10" :
+            "bg-gray-50 text-gray-500 hover:bg-gray-100"}`
+            }>
+            
               <CalendarIcon size={16} />
               <span className="text-xs font-bold">Data</span>
             </button>
@@ -213,19 +213,19 @@ export default function Extract() {
 
       {/* Content */}
       <main className="px-6 py-4 space-y-4">
-        {filteredTransactions.length > 0 ? (
-           <div className="space-y-4">
+        {filteredTransactions.length > 0 ?
+        <div className="space-y-4">
               {/* Group by date logic could go here, for now simple list */}
-              {filteredTransactions.map((trx) => (
-                <button 
-                  key={trx.id} 
-                  onClick={() => setSelectedTransaction(trx)}
-                  className="w-full flex items-center justify-between py-3 border-b border-gray-50 last:border-0 group hover:bg-gray-50 transition-colors px-2 -mx-2 rounded-xl"
-                >
+              {filteredTransactions.map((trx) =>
+          <button
+            key={trx.id}
+            onClick={() => setSelectedTransaction(trx)}
+            className="w-full flex items-center justify-between py-3 border-b border-gray-50 last:border-0 group hover:bg-gray-50 transition-colors px-2 -mx-2 rounded-xl">
+            
                    <div className="flex items-center gap-4 text-left">
                       <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${
-                         trx.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-                      }`}>
+              trx.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`
+              }>
                          {trx.type === 'credit' ? <ArrowDownLeft size={20} /> : <ArrowUpRight size={20} />}
                       </div>
                       <div>
@@ -239,14 +239,14 @@ export default function Extract() {
                       </p>
                    </div>
                 </button>
-              ))}
-           </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center py-12 text-center text-gray-400">
+          )}
+           </div> :
+
+        <div className="flex flex-col items-center justify-center py-12 text-center text-gray-400">
             <Filter size={48} className="mb-4 opacity-20" />
             <p>Nenhuma transação encontrada para este filtro.</p>
           </div>
-        )}
+        }
       </main>
 
       {/* Filter Modal (Date Only) */}
@@ -259,14 +259,14 @@ export default function Extract() {
                
                <div className="flex justify-between items-center mb-8">
                   <h2 className="text-2xl font-bold text-secondary">Filtrar por Data</h2>
-                  <button 
-                     onClick={() => {
-                        setStartDate(undefined);
-                        setEndDate(undefined);
-                        setDateError("");
-                     }}
-                     className="text-sm font-bold text-gray-400 hover:text-primary transition-colors"
-                  >
+                  <button
+                  onClick={() => {
+                    setStartDate(undefined);
+                    setEndDate(undefined);
+                    setDateError("");
+                  }}
+                  className="text-sm font-bold text-gray-400 hover:text-primary transition-colors">
+                  
                      Limpar
                   </button>
                </div>
@@ -280,21 +280,21 @@ export default function Extract() {
                            <Popover>
                               <PopoverTrigger asChild>
                                 <button className={cn(
-                                  "w-full h-12 px-4 bg-gray-50 rounded-2xl border-none text-secondary font-medium outline-none transition-all flex items-center justify-start text-left",
-                                  !startDate && "text-gray-400"
-                                )}>
+                            "w-full h-12 px-4 bg-gray-50 rounded-2xl border-none text-secondary font-medium outline-none transition-all flex items-center justify-start text-left",
+                            !startDate && "text-gray-400"
+                          )}>
                                   <CalendarIcon size={16} className="mr-2 opacity-50" />
                                   {startDate ? format(startDate, "dd/MM/yyyy") : <span>Selecione</span>}
                                 </button>
                               </PopoverTrigger>
                               <PopoverContent className="w-auto p-0" align="start">
                                 <Calendar
-                                  mode="single"
-                                  selected={startDate}
-                                  onSelect={(date) => handleDateChange('start', date)}
-                                  initialFocus
-                                  locale={ptBR}
-                                />
+                            mode="single"
+                            selected={startDate}
+                            onSelect={(date) => handleDateChange('start', date)}
+                            initialFocus
+                            locale={ptBR} />
+                          
                               </PopoverContent>
                             </Popover>
                         </div>
@@ -303,31 +303,31 @@ export default function Extract() {
                            <Popover>
                               <PopoverTrigger asChild>
                                 <button className={cn(
-                                  "w-full h-12 px-4 bg-gray-50 rounded-2xl border-none text-secondary font-medium outline-none transition-all flex items-center justify-start text-left",
-                                  !endDate && "text-gray-400"
-                                )}>
+                            "w-full h-12 px-4 bg-gray-50 rounded-2xl border-none text-secondary font-medium outline-none transition-all flex items-center justify-start text-left",
+                            !endDate && "text-gray-400"
+                          )}>
                                   <CalendarIcon size={16} className="mr-2 opacity-50" />
                                   {endDate ? format(endDate, "dd/MM/yyyy") : <span>Selecione</span>}
                                 </button>
                               </PopoverTrigger>
                               <PopoverContent className="w-auto p-0" align="start">
                                 <Calendar
-                                  mode="single"
-                                  selected={endDate}
-                                  onSelect={(date) => handleDateChange('end', date)}
-                                  initialFocus
-                                  locale={ptBR}
-                                />
+                            mode="single"
+                            selected={endDate}
+                            onSelect={(date) => handleDateChange('end', date)}
+                            initialFocus
+                            locale={ptBR} />
+                          
                               </PopoverContent>
                             </Popover>
                         </div>
                      </div>
-                     {dateError && (
-                        <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">
+                     {dateError &&
+                  <p className="text-xs text-red-500 font-bold mt-2 flex items-center gap-1">
                            <AlertTriangle size={12} />
                            {dateError}
                         </p>
-                     )}
+                  }
                      <p className="text-xs text-gray-400 mt-2">
                         Selecione um intervalo de até 90 dias.
                      </p>
@@ -335,10 +335,10 @@ export default function Extract() {
                </div>
 
                <div className="pt-8">
-                  <button 
-                    onClick={() => setIsFilterOpen(false)}
-                    className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold text-lg shadow-lg shadow-secondary/20 active:scale-[0.98] transition-all"
-                  >
+                  <button
+                  onClick={() => setIsFilterOpen(false)}
+                  className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold text-lg shadow-lg shadow-secondary/20 active:scale-[0.98] transition-all">
+                  
                      Aplicar Filtros
                   </button>
                </div>
@@ -352,14 +352,14 @@ export default function Extract() {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50" />
           <Drawer.Content className="bg-white flex flex-col rounded-t-[32px] mt-24 h-auto fixed bottom-0 left-0 right-0 z-50 outline-none">
-             {selectedTransaction && (
-               <div className="p-6">
+             {selectedTransaction &&
+            <div className="p-6">
                  <div className="w-12 h-1.5 bg-gray-200 rounded-full mx-auto mb-8" />
                  
                  <div className="text-center mb-8">
                     <div className={`h-16 w-16 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                       selectedTransaction.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-                    }`}>
+                selectedTransaction.type === 'credit' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}`
+                }>
                        {selectedTransaction.type === 'credit' ? <ArrowDownLeft size={32} /> : <ArrowUpRight size={32} />}
                     </div>
                     <p className="text-sm font-medium text-gray-500 mb-1">Valor da transação</p>
@@ -389,23 +389,23 @@ export default function Extract() {
                     </div>
                  </div>
 
-                 {selectedTransaction.type === 'debit' && (
-                    <button 
-                      onClick={() => {
-                        toast({ description: "Comprovante compartilhado com sucesso!" });
-                        setSelectedTransaction(null);
-                      }}
-                      className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold text-lg shadow-lg shadow-secondary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
-                    >
+                 {selectedTransaction.type === 'debit' &&
+              <button
+                onClick={() => {
+                  toast({ description: "Comprovante compartilhado com sucesso!" });
+                  setSelectedTransaction(null);
+                }}
+                className="w-full py-4 bg-secondary text-primary rounded-2xl font-bold text-lg shadow-lg shadow-secondary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                
                        <Share2 size={20} />
                        Compartilhar Comprovante
                     </button>
-                 )}
+              }
                </div>
-             )}
+            }
           </Drawer.Content>
         </Drawer.Portal>
       </Drawer.Root>
-    </div>
-  );
+    </div>);
+
 }
