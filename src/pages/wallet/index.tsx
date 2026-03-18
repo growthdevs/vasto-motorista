@@ -110,27 +110,25 @@ export default function WalletPage() {
         <section className="px-6">
           <div className="grid grid-cols-2 gap-3">
             <Link href="/wallet/release-schedule">
-              <div className="bg-muted rounded-2xl p-4 flex items-center gap-3 active:bg-muted/80 transition-colors">
-                <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                  <Clock size={18} className="text-primary" />
+              <div className="bg-muted rounded-2xl p-4 flex flex-col items-start gap-3 active:bg-muted/80 transition-colors min-h-[100px]">
+                <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                  <Clock size={14} className="text-primary" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-secondary">A liberar</p>
                   <p className="text-xs text-muted-foreground">Ver detalhes</p>
                 </div>
-                <ChevronRight size={16} className="text-muted-foreground ml-auto" />
               </div>
             </Link>
             <Link href="/transfer">
-              <div className="bg-muted rounded-2xl p-4 flex items-center gap-3 active:bg-muted/80 transition-colors">
-                <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
-                  <ArrowUpRight size={18} className="text-primary" />
+              <div className="bg-muted rounded-2xl p-4 flex flex-col items-start gap-3 active:bg-muted/80 transition-colors min-h-[100px]">
+                <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                  <ArrowUpRight size={14} className="text-primary" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-secondary">Transferir</p>
                   <p className="text-xs text-muted-foreground">Saldo disponível</p>
                 </div>
-                <ChevronRight size={16} className="text-muted-foreground ml-auto" />
               </div>
             </Link>
           </div>
