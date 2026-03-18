@@ -71,7 +71,7 @@ export default function Anticipate() {
         <p className="text-sm text-muted-foreground mb-1">
           Valor creditado no saldo disponível:
         </p>
-        <p className="text-3xl font-bold text-foreground mb-8">{formatCurrency(valorLiquido)}</p>
+        <p className="text-3xl font-bold text-alert-success mb-8">{formatCurrency(valorLiquido)}</p>
         <button onClick={() => setLocation("/wallet")} className="w-full btn-primary">
           Voltar para Carteira
         </button>
