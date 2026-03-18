@@ -381,15 +381,15 @@ export default function Home() {
 
          {/* Notification Banner - Etapa 2 */}
         <section className="px-6">
-           <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-start gap-3">
-            <AlertTriangle className="text-orange-600 shrink-0 mt-0.5" size={20} />
+           <div className="bg-primary/10 border border-primary/40 rounded-xl p-4 flex items-start gap-3">
+            <AlertTriangle className="text-yellow-600 shrink-0 mt-0.5" size={20} />
             <div>
               <h3 className="font-bold text-secondary text-sm">Cadastro incompleto</h3>
               <p className="text-xs text-gray-600 mt-1">
                 Precisamos de alguns dados adicionais para liberar algumas funções como transferência.
               </p>
               <Link href="/register/step-2">
-                <button className="text-xs font-bold text-orange-700 underline mt-2">
+                <button className="text-xs font-bold text-yellow-600 underline mt-2">
                   Finalizar cadastro
                 </button>
               </Link>
