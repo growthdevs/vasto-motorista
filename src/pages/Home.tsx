@@ -22,7 +22,8 @@ import {
   Shield,
   CheckCircle2,
   Info,
-  MapPin
+  MapPin,
+  Clock
 } from "lucide-react";
 import { useState } from "react";
 import vastoLogoBlack from "@assets/vasto-logo-black_1765408289648.png";
@@ -286,29 +287,40 @@ export default function Home() {
       {/* Main Content */}
       <main className="space-y-8 pt-4">
         
-        {/* Balance Section - Restore Wallet Card Style */}
+        {/* Wallet Card */}
         <section className="px-6">
-          <div className="bg-secondary rounded-2xl p-6 text-white shadow-xl relative overflow-hidden">
-            <div className="relative z-10">
-              <div className="flex justify-between items-start mb-2">
-                <span className="text-gray-400 text-sm font-medium">Saldo em carteira</span>
-                <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
+          <Link href="/wallet">
+            <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden active:scale-[0.99] transition-transform cursor-pointer">
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-muted-foreground text-sm font-medium">Saldo em carteira</span>
+                  <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
+                </div>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-3xl font-bold text-primary">
+                    {showBalance ? balance : hiddenBalance}
+                  </h2>
+                  <button onClick={(e) => { e.preventDefault(); setShowBalance(!showBalance); }} className="text-muted-foreground hover:text-secondary-foreground transition-colors p-1">
+                    {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
+                  </button>
+                </div>
+
+                {/* Mini saldo a liberar */}
+                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
+                  <Clock size={14} className="text-vasto-secundario-300" />
+                  <span className="text-xs text-muted-foreground">A liberar:</span>
+                  <span className="text-xs font-bold text-vasto-secundario-300">
+                    {showBalance ? "R$ 3.480,00" : "••••"}
+                  </span>
+                  <ChevronRight size={14} className="text-muted-foreground ml-auto" />
+                </div>
               </div>
               
-              <div className="flex items-center justify-between mb-2">
-                <h2 className="text-3xl font-bold text-primary">
-                  {showBalance ? balance : hiddenBalance}
-                </h2>
-                <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
-                  {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
-                </button>
-              </div>
+              <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
+              <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
             </div>
-            
-            {/* Background decoration */}
-            <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
-            <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
-          </div>
+          </Link>
         </section>
 
         {/* Quick Actions - Centered and Aligned */}
