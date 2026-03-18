@@ -291,8 +291,7 @@ export default function Home() {
         <section className="px-6">
           <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden">
             <div className="relative z-10">
-              <div className="flex justify-between items-start mb-4">
-                <span className="text-gray-400 text-sm font-medium">Saldo total</span>
+              <div className="flex justify-end items-center mb-4">
                 <div className="flex items-center gap-3">
                   <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
                     {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
@@ -300,23 +299,18 @@ export default function Home() {
                   <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
                 </div>
               </div>
-              <h2 className="text-3xl font-bold text-primary mb-6">
-                {showBalance ? "R$ 4.730,00" : hiddenBalance}
-              </h2>
 
               {/* Two balances */}
-              <div className="grid grid-cols-2 gap-3">
-                <Link href="/wallet">
-                  <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer">
-                    <div className="flex items-center gap-1.5 mb-1">
-                      <Wallet size={14} className="text-primary" />
-                      <span className="text-xs text-gray-400 font-medium">Disponível</span>
-                    </div>
-                    <p className="text-lg font-bold text-primary">
-                      {showBalance ? "R$ 1.250,00" : "••••"}
-                    </p>
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                <div className="bg-white/10 rounded-xl p-3">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <Wallet size={14} className="text-primary" />
+                    <span className="text-xs text-gray-400 font-medium">Disponível</span>
                   </div>
-                </Link>
+                  <p className="text-lg font-bold text-primary">
+                    {showBalance ? "R$ 1.250,00" : "••••"}
+                  </p>
+                </div>
                 <Link href="/wallet/release-schedule">
                   <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer group">
                     <div className="flex items-center gap-1.5 mb-1">
@@ -330,6 +324,13 @@ export default function Home() {
                   </div>
                 </Link>
               </div>
+
+              {/* Ver carteira button */}
+              <Link href="/wallet">
+                <button className="w-full bg-primary text-secondary font-bold text-sm py-2.5 rounded-xl active:scale-[0.98] transition-transform">
+                  Ver carteira
+                </button>
+              </Link>
             </div>
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
             <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
