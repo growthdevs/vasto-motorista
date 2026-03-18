@@ -287,40 +287,53 @@ export default function Home() {
       {/* Main Content */}
       <main className="space-y-8 pt-4">
         
-        {/* Wallet Card */}
+        {/* Wallet Card - matching wallet page design */}
         <section className="px-6">
-          <Link href="/wallet">
-            <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden active:scale-[0.99] transition-transform cursor-pointer">
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-2">
-                  <span className="text-muted-foreground text-sm font-medium">Saldo em carteira</span>
+          <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden">
+            <div className="relative z-10">
+              <div className="flex justify-between items-start mb-4">
+                <span className="text-gray-400 text-sm font-medium">Saldo total</span>
+                <div className="flex items-center gap-3">
+                  <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
+                    {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
+                  </button>
                   <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
                 </div>
-                
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-3xl font-bold text-primary">
-                    {showBalance ? balance : hiddenBalance}
-                  </h2>
-                  <button onClick={(e) => { e.preventDefault(); setShowBalance(!showBalance); }} className="text-muted-foreground hover:text-secondary-foreground transition-colors p-1">
-                    {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
-                  </button>
-                </div>
-
-                {/* Mini saldo a liberar */}
-                <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-                  <Clock size={14} className="text-vasto-secundario-300" />
-                  <span className="text-xs text-muted-foreground">A liberar:</span>
-                  <span className="text-xs font-bold text-vasto-secundario-300">
-                    {showBalance ? "R$ 3.480,00" : "••••"}
-                  </span>
-                  <ChevronRight size={14} className="text-muted-foreground ml-auto" />
-                </div>
               </div>
-              
-              <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
-              <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
+              <h2 className="text-3xl font-bold text-primary mb-6">
+                {showBalance ? "R$ 4.730,00" : hiddenBalance}
+              </h2>
+
+              {/* Two balances */}
+              <div className="grid grid-cols-2 gap-3">
+                <Link href="/wallet">
+                  <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Wallet size={14} className="text-primary" />
+                      <span className="text-xs text-gray-400 font-medium">Disponível</span>
+                    </div>
+                    <p className="text-lg font-bold text-primary">
+                      {showBalance ? "R$ 1.250,00" : "••••"}
+                    </p>
+                  </div>
+                </Link>
+                <Link href="/wallet/release-schedule">
+                  <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer group">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Clock size={14} className="text-gray-400" />
+                      <span className="text-xs text-gray-400 font-medium">A liberar</span>
+                      <ChevronRight size={14} className="text-gray-400 ml-auto group-active:translate-x-0.5 transition-transform" />
+                    </div>
+                    <p className="text-lg font-bold text-white">
+                      {showBalance ? "R$ 3.480,00" : "••••"}
+                    </p>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </Link>
+            <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
+            <div className="absolute -left-10 -bottom-10 h-32 w-32 bg-primary/10 rounded-full blur-xl"></div>
+          </div>
         </section>
 
         {/* Quick Actions - Centered and Aligned */}
@@ -368,15 +381,15 @@ export default function Home() {
 
          {/* Notification Banner - Etapa 2 */}
         <section className="px-6">
-           <div className="bg-primary/10 border border-primary/40 rounded-xl p-4 flex items-start gap-3">
-            <AlertTriangle className="text-yellow-600 shrink-0 mt-0.5" size={20} />
+           <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 flex items-start gap-3">
+            <AlertTriangle className="text-orange-600 shrink-0 mt-0.5" size={20} />
             <div>
               <h3 className="font-bold text-secondary text-sm">Cadastro incompleto</h3>
               <p className="text-xs text-gray-600 mt-1">
                 Precisamos de alguns dados adicionais para liberar algumas funções como transferência.
               </p>
               <Link href="/register/step-2">
-                <button className="text-xs font-bold text-yellow-600 underline mt-2">
+                <button className="text-xs font-bold text-orange-700 underline mt-2">
                   Finalizar cadastro
                 </button>
               </Link>
@@ -450,9 +463,9 @@ export default function Home() {
 
                    {/* Destination */}
                    <div className="relative flex items-start gap-3">
-                      <div className="h-8 w-8 rounded-full bg-yellow-50 flex items-center justify-center shrink-0 mt-1 relative z-10">
-                         <MapPin size={16} className="text-yellow-600 fill-yellow-600" />
-                      </div>
+                       <div className="h-8 w-8 rounded-full bg-secondary flex items-center justify-center shrink-0 mt-1 relative z-10">
+                          <MapPin size={16} className="text-primary fill-primary" />
+                       </div>
                       <div>
                          <p className="text-xs text-gray-400 font-medium mb-0.5">Entrega</p>
                         <p className="text-sm font-bold text-secondary leading-tight">

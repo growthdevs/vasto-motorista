@@ -40,7 +40,7 @@ export default function WalletPage() {
           <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground relative overflow-hidden">
             <div className="relative z-10">
               <div className="flex justify-between items-start mb-4">
-                <span className="text-muted-foreground text-sm font-medium">Saldo total</span>
+                <span className="text-gray-400 text-sm font-medium">Saldo total</span>
                 <img src={vastoLogoYellow} alt="VASTO" className="h-4 object-contain" />
               </div>
               <h2 className="text-3xl font-bold text-primary mb-6">
@@ -48,25 +48,28 @@ export default function WalletPage() {
               </h2>
 
               {/* Two balances */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/10 rounded-xl p-3">
                   <div className="flex items-center gap-1.5 mb-1">
                     <Wallet size={14} className="text-primary" />
-                    <span className="text-xs text-muted-foreground font-medium">Disponível</span>
+                    <span className="text-xs text-gray-400 font-medium">Disponível</span>
                   </div>
                   <p className="text-lg font-bold text-primary">
                     {showBalance ? formatCurrency(saldoDisponivel) : "••••"}
                   </p>
                 </div>
-                <div className="bg-white/10 rounded-xl p-3">
-                  <div className="flex items-center gap-1.5 mb-1">
-                    <Clock size={14} className="text-vasto-secundario-300" />
-                    <span className="text-xs text-muted-foreground font-medium">A liberar</span>
+                <Link href="/wallet/release-schedule">
+                  <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer group">
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Clock size={14} className="text-gray-400" />
+                      <span className="text-xs text-gray-400 font-medium">A liberar</span>
+                      <ChevronRight size={14} className="text-gray-400 ml-auto group-active:translate-x-0.5 transition-transform" />
+                    </div>
+                    <p className="text-lg font-bold text-white">
+                      {showBalance ? formatCurrency(saldoALiberar) : "••••"}
+                    </p>
                   </div>
-                  <p className="text-lg font-bold text-vasto-secundario-300">
-                    {showBalance ? formatCurrency(saldoALiberar) : "••••"}
-                  </p>
-                </div>
+                </Link>
               </div>
             </div>
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl" />
@@ -76,20 +79,20 @@ export default function WalletPage() {
 
         {/* Anticipation CTA */}
         <section className="px-6">
-          <div className="bg-accent rounded-2xl p-5 border border-primary/20">
+          <div className="bg-gray-50 rounded-2xl p-5 border border-gray-200">
             <div className="flex items-start gap-3 mb-3">
-              <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center shrink-0">
-                <Zap size={20} className="text-primary-foreground" />
+              <div className="h-10 w-10 rounded-full bg-secondary flex items-center justify-center shrink-0">
+                <Zap size={20} className="text-primary" />
               </div>
               <div className="flex-1">
                 <h3 className="font-bold text-secondary text-sm">Antecipe e receba hoje</h3>
-                <p className="text-xs text-muted-foreground mt-0.5">
+                <p className="text-xs text-gray-500 mt-0.5">
                   Você pode antecipar{" "}
                   <span className="font-bold text-secondary">
                     {showBalance ? formatCurrency(saldoALiberar) : "••••"}
                   </span>{" "}
                   e receber{" "}
-                  <span className="font-bold text-primary">
+                  <span className="font-bold text-secondary">
                     {showBalance ? formatCurrency(valorAntecipavelLiquido) : "••••"}
                   </span>{" "}
                   agora.
@@ -151,8 +154,8 @@ export default function WalletPage() {
               { id: "FRT-8650", value: 1530, days: 10, date: "22 Mar 2026" },
             ].map((item) => (
               <div key={item.id} className="bg-muted rounded-2xl p-4 flex items-center gap-4 border border-border">
-                <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center shrink-0">
-                  <Clock size={18} className="text-primary" />
+                <div className="h-10 w-10 rounded-full bg-gray-100 flex items-center justify-center shrink-0">
+                  <Clock size={18} className="text-secondary" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-sm font-bold text-secondary">{item.id}</p>
