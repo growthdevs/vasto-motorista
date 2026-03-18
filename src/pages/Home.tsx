@@ -291,7 +291,8 @@ export default function Home() {
         <section className="px-6">
           <div className="bg-secondary rounded-2xl p-6 text-secondary-foreground shadow-xl relative overflow-hidden">
             <div className="relative z-10">
-              <div className="flex justify-end items-center mb-4">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm font-semibold text-gray-400">Sua carteira</span>
                 <div className="flex items-center gap-3">
                   <button onClick={() => setShowBalance(!showBalance)} className="text-gray-400 hover:text-white transition-colors p-1">
                     {showBalance ? <Eye size={18} /> : <EyeOff size={18} />}
@@ -327,9 +328,10 @@ export default function Home() {
 
               {/* Ver carteira button */}
               <Link href="/wallet">
-                <button className="w-full bg-primary text-secondary font-bold text-sm py-2.5 rounded-xl active:scale-[0.98] transition-transform">
-                  Ver carteira
-                </button>
+                <div className="bg-white/10 rounded-xl p-3 active:bg-white/15 transition-colors cursor-pointer group flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-400">Ver carteira</span>
+                  <ChevronRight size={16} className="text-gray-400 group-active:translate-x-0.5 transition-transform" />
+                </div>
               </Link>
             </div>
             <div className="absolute -right-10 -top-10 h-40 w-40 bg-white/5 rounded-full blur-2xl"></div>
