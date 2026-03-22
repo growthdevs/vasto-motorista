@@ -120,27 +120,23 @@ export default function Profile() {
            </div>
         </section>
 
-        {/* Financial Info */}
+        {/* Chaves Pix */}
         <section className="space-y-4">
-           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wide">Financeiro</h3>
+           <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wide">Pix</h3>
            
            <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100">
               <Link href="/profile/edit-bank">
                 <div className="p-4 flex items-center justify-between hover:bg-gray-100 transition-colors cursor-pointer group">
                    <div className="flex items-center gap-4">
                       <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-secondary shrink-0 group-hover:bg-primary/20 transition-colors">
-                         <Building2 size={20} />
+                          <CreditCard size={20} />
                       </div>
                       <div>
-                         <p className="text-xs text-gray-400 font-medium">Conta para recebimento</p>
-                         <p className="text-sm font-bold text-secondary">{user.bank}</p>
-                         <p className="text-xs text-gray-500">{user.account}</p>
+                         <p className="text-xs text-gray-400 font-medium">Minhas Chaves Pix</p>
+                         <p className="text-sm font-bold text-secondary">Gerenciar chaves</p>
                       </div>
                    </div>
-                   <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-primary bg-secondary px-2 py-0.5 rounded-md">Ativo</span>
-                      <ChevronRight size={20} className="text-gray-400" />
-                   </div>
+                   <ChevronRight size={20} className="text-gray-400" />
                 </div>
               </Link>
            </div>
