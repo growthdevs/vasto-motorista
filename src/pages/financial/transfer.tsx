@@ -83,12 +83,12 @@ export default function Transfer() {
         <div className="bg-gray-50 rounded-2xl p-4 w-full max-w-sm mb-8 border border-gray-100">
            <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-200/60">
               <div className="h-10 w-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary">
-                 <Building2 size={20} />
+                 <Key size={20} />
               </div>
               <div>
-                 <p className="text-xs text-gray-400 font-medium">Conta destino</p>
-                 <p className="text-sm font-bold text-secondary">{userAccount.bank}</p>
-                 <p className="text-xs text-gray-500">Ag {userAccount.agency} • Cc {userAccount.account}</p>
+                 <p className="text-xs text-gray-400 font-medium">Chave Pix</p>
+                 <p className="text-sm font-bold text-secondary">{pixLabel}</p>
+                 <p className="text-xs text-gray-500">{pixKey.value}</p>
               </div>
            </div>
            <div className="flex items-center gap-2 text-xs text-gray-500">
