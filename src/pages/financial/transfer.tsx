@@ -94,7 +94,7 @@ export default function Transfer() {
                  <p className="text-xs text-gray-500">{pixKey.value}</p>
               </div>
            </div>
-           <div className="flex items-center gap-2 text-xs text-primary font-medium">
+           <div className="flex items-center gap-2 text-xs text-secondary font-medium">
               <Clock size={14} />
               <span>Em processamento</span>
            </div>
