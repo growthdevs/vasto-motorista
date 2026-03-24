@@ -105,7 +105,6 @@ export default function Transfer() {
             Voltar ao Início
           </button>
         </Link>
-        </button>
       </div>
     );
   }
