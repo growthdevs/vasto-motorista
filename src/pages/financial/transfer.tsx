@@ -72,12 +72,15 @@ export default function Transfer() {
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-white font-sans flex flex-col items-center justify-center p-6 animate-in fade-in zoom-in duration-300">
-        <div className="h-24 w-24 rounded-full bg-green-100 flex items-center justify-center mb-6 text-green-600">
-          <CheckCircle2 size={48} />
+        <div className="h-24 w-24 rounded-full bg-amber-50 flex items-center justify-center mb-6 text-primary">
+          <Clock size={48} />
         </div>
-        <h2 className="text-2xl font-bold text-secondary mb-2 text-center">Transferência Realizada!</h2>
-        <p className="text-gray-500 text-center mb-8 max-w-xs">
-          O valor de <span className="font-bold text-secondary">R$ {formattedNetReceived}</span> já foi enviado.
+        <h2 className="text-2xl font-bold text-secondary mb-2 text-center">Solicitação enviada!</h2>
+        <p className="text-gray-500 text-center mb-2 max-w-xs">
+          Seu saque de <span className="font-bold text-secondary">R$ {formattedNetReceived}</span> está sendo processado.
+        </p>
+        <p className="text-gray-400 text-center mb-8 max-w-xs text-sm">
+          Você receberá uma notificação assim que o valor cair na sua chave Pix. Fique tranquilo!
         </p>
         
         <div className="bg-gray-50 rounded-2xl p-4 w-full max-w-sm mb-8 border border-gray-100">
@@ -91,9 +94,9 @@ export default function Transfer() {
                  <p className="text-xs text-gray-500">{pixKey.value}</p>
               </div>
            </div>
-           <div className="flex items-center gap-2 text-xs text-gray-500">
+           <div className="flex items-center gap-2 text-xs text-primary font-medium">
               <Clock size={14} />
-              <span>Previsão: Imediato (Pix)</span>
+              <span>Em processamento</span>
            </div>
         </div>
 
@@ -102,13 +105,6 @@ export default function Transfer() {
             Voltar ao Início
           </button>
         </Link>
-        
-        <button 
-          onClick={() => toast({ description: "Comprovante compartilhado com sucesso!" })}
-          className="mt-4 text-secondary font-bold text-sm hover:underline transition-all"
-        >
-          Compartilhar Comprovante
-        </button>
       </div>
     );
   }
