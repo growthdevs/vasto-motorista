@@ -2,10 +2,11 @@ import { Link, useLocation } from "wouter";
 import { 
   ArrowLeft, 
   ArrowRight,
-  Building2,
   CheckCircle2,
   Clock,
+  Copy,
   Info,
+  Key,
   ShieldCheck
 } from "lucide-react";
 import { useState } from "react";
