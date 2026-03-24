@@ -195,16 +195,15 @@ export default function Transfer() {
              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 space-y-4">
                 <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide text-gray-400">Para</h3>
                 
-                <div className="flex items-center gap-4 mb-6">
-                   <div className="h-12 w-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary shrink-0">
-                      <Building2 size={24} />
-                   </div>
-                   <div>
-                      <h4 className="font-bold text-secondary text-lg">{userAccount.name}</h4>
-                      <p className="text-sm text-gray-600">{userAccount.bank} • Ag {userAccount.agency} • Cc {userAccount.account}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">CPF: ***.***.***-00</p>
-                   </div>
-                </div>
+                 <div className="flex items-center gap-4 mb-6">
+                    <div className="h-12 w-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary shrink-0">
+                       <Key size={24} />
+                    </div>
+                    <div>
+                       <h4 className="font-bold text-secondary text-sm text-gray-400">{pixLabel}</h4>
+                       <p className="text-sm font-bold text-secondary">{pixKey.value}</p>
+                    </div>
+                 </div>
 
                 <div className="border-t border-gray-100 pt-4 space-y-2">
                    <div className="flex justify-between items-center text-sm">
