@@ -2,10 +2,11 @@ import { Link, useLocation } from "wouter";
 import { 
   ArrowLeft, 
   ArrowRight,
-  Building2,
   CheckCircle2,
   Clock,
+  
   Info,
+  Key,
   ShieldCheck
 } from "lucide-react";
 import { useState } from "react";
@@ -19,14 +20,17 @@ export default function Transfer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Mock data - User's registered account (from Step 2)
-  const userAccount = {
-    bank: "Nubank",
-    agency: "0001",
-    account: "123456-7",
-    pixKey: "123.***.***-00",
-    name: "Jackson Five"
+  // Get first registered Pix key from localStorage
+  const getPixKey = () => {
+    try {
+      const keys = JSON.parse(localStorage.getItem("pix-keys") || "[]");
+      return keys.length > 0 ? keys[0] : { type: "cpf", value: "123.***.***-00" };
+    } catch {
+      return { type: "cpf", value: "123.***.***-00" };
+    }
   };
+  const pixKey = getPixKey();
+  const pixLabel = pixKey.type === "cpf" ? "CPF" : pixKey.type === "email" ? "E-mail" : pixKey.type === "phone" ? "Celular" : "Chave Aleatória";
 
   const balance = "1.250,00";
 
@@ -79,12 +83,12 @@ export default function Transfer() {
         <div className="bg-gray-50 rounded-2xl p-4 w-full max-w-sm mb-8 border border-gray-100">
            <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-200/60">
               <div className="h-10 w-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary">
-                 <Building2 size={20} />
+                 <Key size={20} />
               </div>
               <div>
-                 <p className="text-xs text-gray-400 font-medium">Conta destino</p>
-                 <p className="text-sm font-bold text-secondary">{userAccount.bank}</p>
-                 <p className="text-xs text-gray-500">Ag {userAccount.agency} • Cc {userAccount.account}</p>
+                 <p className="text-xs text-gray-400 font-medium">Chave Pix</p>
+                 <p className="text-sm font-bold text-secondary">{pixLabel}</p>
+                 <p className="text-xs text-gray-500">{pixKey.value}</p>
               </div>
            </div>
            <div className="flex items-center gap-2 text-xs text-gray-500">
@@ -131,20 +135,20 @@ export default function Transfer() {
         {step === 1 && (
           <div className="space-y-8 animate-in slide-in-from-right duration-300">
              
-             {/* Account Info Card (Top) */}
-             <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center justify-between">
-                <div>
-                   <p className="text-xs text-gray-400 font-medium mb-1">Conta destino (Cadastrada)</p>
-                   <div className="flex items-center gap-2">
-                      <Building2 size={16} className="text-secondary" />
-                      <span className="text-sm font-bold text-secondary">{userAccount.bank}</span>
-                   </div>
-                   <p className="text-xs text-gray-500 mt-1">Ag {userAccount.agency} • Cc {userAccount.account}</p>
-                </div>
-                <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
-                   <ShieldCheck size={16} />
-                </div>
-             </div>
+             {/* Pix Key Card (Top) */}
+              <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center justify-between">
+                 <div>
+                    <p className="text-xs text-gray-400 font-medium mb-1">Chave Pix cadastrada</p>
+                    <div className="flex items-center gap-2">
+                       <Key size={16} className="text-secondary" />
+                       <span className="text-sm font-bold text-secondary">{pixLabel}</span>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">{pixKey.value}</p>
+                 </div>
+                 <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                    <ShieldCheck size={16} />
+                 </div>
+              </div>
 
              <div className="space-y-4 pt-4">
                <label className="text-2xl font-bold text-secondary block text-center">Quanto você quer transferir?</label>
@@ -191,16 +195,15 @@ export default function Transfer() {
              <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 space-y-4">
                 <h3 className="font-bold text-secondary mb-4 text-sm uppercase tracking-wide text-gray-400">Para</h3>
                 
-                <div className="flex items-center gap-4 mb-6">
-                   <div className="h-12 w-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary shrink-0">
-                      <Building2 size={24} />
-                   </div>
-                   <div>
-                      <h4 className="font-bold text-secondary text-lg">{userAccount.name}</h4>
-                      <p className="text-sm text-gray-600">{userAccount.bank} • Ag {userAccount.agency} • Cc {userAccount.account}</p>
-                      <p className="text-xs text-gray-400 mt-0.5">CPF: ***.***.***-00</p>
-                   </div>
-                </div>
+                 <div className="flex items-center gap-4 mb-6">
+                    <div className="h-12 w-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary shrink-0">
+                       <Key size={24} />
+                    </div>
+                    <div>
+                       <h4 className="font-bold text-secondary text-sm text-gray-400">{pixLabel}</h4>
+                       <p className="text-sm font-bold text-secondary">{pixKey.value}</p>
+                    </div>
+                 </div>
 
                 <div className="border-t border-gray-100 pt-4 space-y-2">
                    <div className="flex justify-between items-center text-sm">
