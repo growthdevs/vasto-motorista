@@ -4,11 +4,10 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock,
-  
   Info,
-  Key,
   ShieldCheck
 } from "lucide-react";
+import PixIcon from "@/components/PixIcon";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
