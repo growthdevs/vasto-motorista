@@ -4,7 +4,7 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock,
-  Copy,
+  
   Info,
   Key,
   ShieldCheck
