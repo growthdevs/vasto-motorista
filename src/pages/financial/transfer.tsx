@@ -20,14 +20,17 @@ export default function Transfer() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Mock data - User's registered account (from Step 2)
-  const userAccount = {
-    bank: "Nubank",
-    agency: "0001",
-    account: "123456-7",
-    pixKey: "123.***.***-00",
-    name: "Jackson Five"
+  // Get first registered Pix key from localStorage
+  const getPixKey = () => {
+    try {
+      const keys = JSON.parse(localStorage.getItem("pix-keys") || "[]");
+      return keys.length > 0 ? keys[0] : { type: "cpf", value: "123.***.***-00" };
+    } catch {
+      return { type: "cpf", value: "123.***.***-00" };
+    }
   };
+  const pixKey = getPixKey();
+  const pixLabel = pixKey.type === "cpf" ? "CPF" : pixKey.type === "email" ? "E-mail" : pixKey.type === "phone" ? "Celular" : "Chave Aleatória";
 
   const balance = "1.250,00";
 
