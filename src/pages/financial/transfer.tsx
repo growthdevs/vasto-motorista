@@ -154,36 +154,18 @@ export default function Transfer() {
         {step === 1 && (
           <div className="space-y-8 animate-in slide-in-from-right duration-300">
              
-            {/* Pix Key Selection */}
-            <div className="space-y-3">
-              <p className="text-sm font-semibold text-muted-foreground">Chave Pix de destino</p>
-              {pixKeys.map((key) => (
-                <button
-                  key={key.id}
-                  onClick={() => setSelectedKey(key)}
-                  className={`w-full rounded-xl p-4 border flex items-center gap-3 text-left transition-all ${
-                    selectedKey?.id === key.id 
-                      ? 'border-primary bg-primary/5' 
-                      : 'border-border bg-muted/50 hover:bg-muted'
-                  }`}
-                >
-                  <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${
-                    selectedKey?.id === key.id ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'
-                  }`}>
-                    <Key size={18} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-foreground font-medium">{pixTypeLabels[key.type]}</p>
-                    <p className="text-sm font-bold text-secondary truncate">{key.value}</p>
-                  </div>
-                  {selectedKey?.id === key.id && (
-                    <div className="h-5 w-5 rounded-full bg-primary flex items-center justify-center">
-                      <CheckCircle2 size={14} className="text-primary-foreground" />
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
+            {/* Pix Key Info */}
+            {selectedKey && (
+              <div className="rounded-xl p-4 border border-border bg-muted/50 flex items-center gap-3">
+                <div className="h-10 w-10 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0">
+                  <Key size={18} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs text-muted-foreground font-medium">{pixTypeLabels[selectedKey.type]}</p>
+                  <p className="text-sm font-bold text-secondary truncate">{selectedKey.value}</p>
+                </div>
+              </div>
+            )}
 
             <div className="space-y-4 pt-4">
               <label className="text-2xl font-bold text-secondary block text-center">Quanto quer transferir?</label>
