@@ -4,11 +4,10 @@ import {
   ArrowRight,
   CheckCircle2,
   Clock,
-  
   Info,
-  Key,
   ShieldCheck
 } from "lucide-react";
+import PixIcon from "@/components/PixIcon";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -86,7 +85,7 @@ export default function Transfer() {
         <div className="bg-gray-50 rounded-2xl p-4 w-full max-w-sm mb-8 border border-gray-100">
            <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-200/60">
               <div className="h-10 w-10 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary">
-                 <Key size={20} />
+                 <PixIcon size={20} />
               </div>
               <div>
                  <p className="text-xs text-gray-400 font-medium">Chave Pix</p>
@@ -193,7 +192,7 @@ export default function Transfer() {
                 
                  <div className="flex items-center gap-4 mb-6">
                     <div className="h-12 w-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-secondary shrink-0">
-                       <Key size={24} />
+                       <PixIcon size={24} />
                     </div>
                     <div>
                        <h4 className="font-bold text-secondary text-sm text-gray-400">{pixLabel}</h4>
