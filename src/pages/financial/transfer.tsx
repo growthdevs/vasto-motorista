@@ -135,7 +135,7 @@ export default function Transfer() {
                  <div>
                     <p className="text-xs text-gray-400 font-medium mb-1">Chave Pix cadastrada</p>
                     <div className="flex items-center gap-2">
-                       <Key size={16} className="text-secondary" />
+                       <PixIcon size={16} />
                        <span className="text-sm font-bold text-secondary">{pixLabel}</span>
                     </div>
                     <p className="text-xs text-gray-500 mt-1">{pixKey.value}</p>
