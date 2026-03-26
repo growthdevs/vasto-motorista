@@ -2,10 +2,9 @@ import { Link, useLocation } from "wouter";
 import { 
   ArrowLeft, 
   Check,
-  ChevronDown,
   Info,
-  Sparkles,
-  Wallet
+  Wallet,
+  X
 } from "lucide-react";
 import PixIcon from "@/components/PixIcon";
 import { useState } from "react";
@@ -30,15 +29,9 @@ export default function Transfer() {
 
   const balance = 1250.00;
 
-  const quickAmounts = [50, 100, 200, 500];
-
   const handleAmountChange = (raw: string) => {
     const cleaned = raw.replace(/[^\d,]/g, '');
     setAmount(cleaned);
-  };
-
-  const handleQuickAmount = (val: number) => {
-    setAmount(val.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
   };
 
   const handleNextStep = () => {
@@ -65,45 +58,66 @@ export default function Transfer() {
   // ─── SUCCESS ───
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-secondary font-sans flex flex-col items-center justify-center p-6 animate-in fade-in duration-500">
-        {/* Animated check */}
-        <div className="h-20 w-20 rounded-full bg-primary flex items-center justify-center mb-8 animate-in zoom-in duration-700">
-          <Check size={40} strokeWidth={3} className="text-primary-foreground" />
-        </div>
-
-        <h2 className="text-2xl font-bold text-secondary-foreground text-center mb-2">
-          Saque solicitado
-        </h2>
-        <p className="text-secondary-foreground/60 text-center text-sm max-w-[260px] mb-10 leading-relaxed">
-          Você receberá <span className="font-bold text-secondary-foreground">R$ {fmt(netReceived)}</span> via Pix assim que processado.
-        </p>
-
-        {/* Mini receipt */}
-        <div className="w-full max-w-xs bg-secondary-foreground/5 rounded-2xl p-5 mb-10 space-y-3">
-          <div className="flex justify-between text-sm">
-            <span className="text-secondary-foreground/50">Debitado</span>
-            <span className="font-semibold text-secondary-foreground">R$ {fmt(totalDebited)}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-secondary-foreground/50">Taxa</span>
-            <span className="font-semibold text-secondary-foreground/70">- R$ {fmt(fee)}</span>
-          </div>
-          <div className="h-px bg-secondary-foreground/10" />
-          <div className="flex justify-between text-sm">
-            <span className="font-bold text-secondary-foreground">Pix</span>
-            <span className="font-bold text-primary">R$ {fmt(netReceived)}</span>
-          </div>
-          <div className="flex items-center gap-2 pt-1">
-            <PixIcon size={14} className="text-secondary-foreground/40" />
-            <span className="text-xs text-secondary-foreground/40 truncate">{pixKey.value}</span>
-          </div>
-        </div>
-
-        <Link href="/home" className="w-full max-w-xs block">
-          <button className="w-full h-14 bg-primary text-primary-foreground rounded-2xl font-bold text-base active:scale-[0.97] transition-transform">
-            Voltar ao início
+      <div className="min-h-screen bg-background font-sans flex flex-col">
+        {/* Header */}
+        <header className="px-5 pt-12 pb-4 flex items-center">
+          <button onClick={() => setLocation('/home')} className="p-2 -ml-2 text-foreground">
+            <X size={22} />
           </button>
-        </Link>
+        </header>
+
+        <div className="flex-1 flex flex-col px-5">
+          {/* Status icon */}
+          <div className="flex items-center gap-3 mb-6">
+            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
+              <Check size={20} strokeWidth={3} className="text-primary-foreground" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-foreground">Saque solicitado</h2>
+              <p className="text-sm text-muted-foreground">Em processamento</p>
+            </div>
+          </div>
+
+          {/* Value */}
+          <div className="mb-8">
+            <p className="text-[40px] font-extrabold text-foreground leading-none">
+              R$ {fmt(netReceived)}
+            </p>
+          </div>
+
+          {/* Details list - Nubank receipt style */}
+          <div className="space-y-0">
+            <div className="py-4 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-0.5">Valor debitado</p>
+              <p className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</p>
+            </div>
+            <div className="py-4 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-0.5">Taxa administrativa</p>
+              <p className="text-sm font-semibold text-destructive">- R$ {fmt(fee)}</p>
+            </div>
+            <div className="py-4 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-0.5">Tipo</p>
+              <div className="flex items-center gap-2">
+                <PixIcon size={14} className="text-foreground" />
+                <p className="text-sm font-semibold text-foreground">Pix</p>
+              </div>
+            </div>
+            <div className="py-4 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-0.5">Chave Pix · {pixLabel}</p>
+              <p className="text-sm font-semibold text-foreground">{pixKey.value}</p>
+            </div>
+          </div>
+
+          <div className="flex-1" />
+
+          <div className="pb-8 pt-6">
+            <Link href="/home" className="block">
+              <button className="w-full h-14 bg-secondary text-secondary-foreground rounded-xl font-bold text-base active:scale-[0.98] transition-transform">
+                Fechar
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -112,27 +126,26 @@ export default function Transfer() {
   if (step === 1) {
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
-        {/* Top bar */}
-        <header className="px-4 pt-12 pb-2 flex items-center gap-3">
+        {/* Header */}
+        <header className="px-5 pt-12 pb-4 flex items-center">
           <button 
             onClick={() => setLocation('/home')}
-            className="p-2 -ml-2 text-foreground/70 hover:text-foreground transition-colors rounded-xl"
+            className="p-2 -ml-2 text-foreground"
           >
             <ArrowLeft size={22} />
           </button>
-          <div className="flex-1" />
-          <div className="flex items-center gap-1.5 bg-muted rounded-full px-3 py-1.5">
-            <Wallet size={13} className="text-muted-foreground" />
-            <span className="text-xs font-semibold text-foreground">R$ {fmt(balance)}</span>
-          </div>
         </header>
 
-        {/* Amount section */}
-        <div className="flex-1 flex flex-col items-center justify-center px-5">
-          <p className="text-muted-foreground text-sm font-medium mb-8">Quanto quer sacar?</p>
-          
-          <div className="flex items-baseline gap-2 mb-3">
-            <span className="text-lg font-bold text-muted-foreground/30">R$</span>
+        <div className="flex-1 flex flex-col px-5">
+          {/* Title */}
+          <h1 className="text-xl font-bold text-foreground mb-1">Qual o valor do saque?</h1>
+          <p className="text-sm text-muted-foreground mb-10">
+            Saldo disponível <span className="font-semibold text-foreground">R$ {fmt(balance)}</span>
+          </p>
+
+          {/* Amount input - Nubank big style */}
+          <div className="flex items-baseline gap-1 mb-2">
+            <span className="text-[32px] font-bold text-muted-foreground/25">R$</span>
             <input 
               type="text" 
               inputMode="decimal"
@@ -140,61 +153,56 @@ export default function Transfer() {
               onChange={(e) => handleAmountChange(e.target.value)}
               placeholder="0,00"
               autoFocus
-              className="bg-transparent text-foreground font-extrabold text-[52px] leading-none outline-none text-center w-full max-w-[250px] placeholder:text-muted-foreground/15 caret-primary"
+              className="bg-transparent text-foreground font-extrabold text-[32px] leading-none outline-none w-full placeholder:text-muted-foreground/20 caret-primary"
             />
           </div>
+          
+          {/* Underline */}
+          <div className={`h-0.5 rounded-full transition-colors duration-300 mb-4 ${
+            totalDebited > 0 ? (totalDebited > balance ? 'bg-destructive' : 'bg-primary') : 'bg-border'
+          }`} />
 
-          {/* Live fee calc */}
+          {/* Live fee preview */}
           {totalDebited > 0 && totalDebited <= balance && (
-            <p className="text-sm text-muted-foreground animate-in fade-in duration-200">
-              Recebe <span className="font-bold text-green-600">R$ {fmt(netReceived)}</span> <span className="text-muted-foreground/60">(-10% taxa)</span>
-            </p>
+            <div className="animate-in fade-in slide-in-from-top-1 duration-200">
+              <p className="text-sm text-muted-foreground">
+                Você recebe <span className="font-bold text-foreground">R$ {fmt(netReceived)}</span>
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-0.5">
+                Taxa de 10% · R$ {fmt(fee)}
+              </p>
+            </div>
           )}
 
           {totalDebited > balance && (
             <p className="text-sm text-destructive font-medium animate-in fade-in duration-200">
-              Saldo insuficiente
+              Valor acima do saldo disponível
             </p>
           )}
 
-          {/* Quick pills */}
-          <div className="flex gap-2 mt-8">
-            {quickAmounts.map((val) => (
-              <button
-                key={val}
-                onClick={() => handleQuickAmount(val)}
-                className={`px-3.5 py-2 rounded-full text-xs font-bold transition-all active:scale-95 ${
-                  totalDebited === val 
-                    ? 'bg-primary text-primary-foreground' 
-                    : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                }`}
-              >
-                {val}
-              </button>
-            ))}
-          </div>
-        </div>
+          <div className="flex-1" />
 
-        {/* Bottom section */}
-        <div className="px-5 pb-8">
           {/* Pix destination */}
-          <div className="flex items-center gap-3 mb-5 px-1">
-            <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-              <PixIcon size={16} />
+          <div className="py-4 border-t border-border flex items-center gap-3 mb-4">
+            <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
+              <PixIcon size={18} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-medium">Pix · {pixLabel}</p>
+              <p className="text-xs text-muted-foreground">Receber via Pix · {pixLabel}</p>
               <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
             </div>
           </div>
 
-          <button 
-            onClick={handleNextStep}
-            disabled={!isAmountValid}
-            className="w-full h-14 bg-secondary text-secondary-foreground rounded-2xl font-bold text-base active:scale-[0.97] transition-all disabled:opacity-25 disabled:cursor-not-allowed"
-          >
-            Continuar
-          </button>
+          {/* CTA */}
+          <div className="pb-8">
+            <button 
+              onClick={handleNextStep}
+              disabled={!isAmountValid}
+              className="w-full h-14 bg-secondary text-secondary-foreground rounded-xl font-bold text-base active:scale-[0.98] transition-all disabled:opacity-25 disabled:cursor-not-allowed"
+            >
+              Continuar
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -203,53 +211,53 @@ export default function Transfer() {
   // ─── STEP 2: CONFIRM ───
   return (
     <div className="min-h-screen bg-background font-sans flex flex-col">
-      <header className="px-4 pt-12 pb-2 flex items-center gap-3">
+      <header className="px-5 pt-12 pb-4 flex items-center">
         <button 
           onClick={() => setStep(1)}
-          className="p-2 -ml-2 text-foreground/70 hover:text-foreground transition-colors rounded-xl"
+          className="p-2 -ml-2 text-foreground"
         >
           <ArrowLeft size={22} />
         </button>
-        <h1 className="text-base font-semibold text-foreground">Revisar saque</h1>
       </header>
 
-      <main className="flex-1 flex flex-col px-5 pt-4">
-        {/* Amount card */}
-        <div className="bg-secondary rounded-2xl p-6 text-center mb-5">
-          <p className="text-secondary-foreground/50 text-xs uppercase tracking-wider font-medium mb-2">Você recebe</p>
-          <p className="text-4xl font-extrabold text-primary leading-none mb-1">R$ {fmt(netReceived)}</p>
-          <p className="text-secondary-foreground/40 text-xs">via Pix</p>
+      <div className="flex-1 flex flex-col px-5">
+        <h1 className="text-xl font-bold text-foreground mb-1">Revise o saque</h1>
+        <p className="text-sm text-muted-foreground mb-8">Confira os dados antes de confirmar</p>
+
+        {/* Amount */}
+        <div className="mb-8">
+          <p className="text-xs text-muted-foreground mb-1">Valor a receber</p>
+          <p className="text-[36px] font-extrabold text-foreground leading-none">
+            R$ {fmt(netReceived)}
+          </p>
         </div>
 
-        {/* Details */}
+        {/* Details - vertical list Nubank-style */}
         <div className="space-y-0">
-          {[
-            { label: "Valor do saque", value: `R$ ${fmt(totalDebited)}`, color: "text-foreground" },
-            { label: "Taxa administrativa (10%)", value: `- R$ ${fmt(fee)}`, color: "text-destructive" },
-          ].map((row) => (
-            <div key={row.label} className="flex justify-between items-center py-3.5 border-b border-border">
-              <span className="text-sm text-muted-foreground">{row.label}</span>
-              <span className={`text-sm font-semibold ${row.color}`}>{row.value}</span>
-            </div>
-          ))}
-          
-          {/* Pix key */}
-          <div className="flex items-center gap-3 py-3.5 border-b border-border">
-            <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+          <div className="py-4 border-t border-border flex justify-between">
+            <span className="text-sm text-muted-foreground">Valor do saque</span>
+            <span className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</span>
+          </div>
+          <div className="py-4 border-t border-border flex justify-between">
+            <span className="text-sm text-muted-foreground">Taxa (10%)</span>
+            <span className="text-sm font-semibold text-destructive">- R$ {fmt(fee)}</span>
+          </div>
+          <div className="py-4 border-t border-border border-b flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
               <PixIcon size={14} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm text-muted-foreground">Chave Pix</p>
+              <p className="text-xs text-muted-foreground">Chave Pix · {pixLabel}</p>
+              <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
             </div>
-            <p className="text-sm font-semibold text-foreground truncate max-w-[140px]">{pixKey.value}</p>
           </div>
         </div>
 
         {/* Info */}
-        <div className="flex gap-2.5 mt-5 mb-auto">
-          <Sparkles size={14} className="text-primary shrink-0 mt-0.5" />
+        <div className="flex gap-2 mt-5 mb-auto">
+          <Info size={14} className="text-muted-foreground/50 shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
-            Você será notificado assim que o Pix for creditado na sua conta.
+            Você receberá uma notificação quando o Pix for creditado.
           </p>
         </div>
 
@@ -258,12 +266,12 @@ export default function Transfer() {
           <button 
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full h-14 bg-secondary text-secondary-foreground rounded-2xl font-bold text-base active:scale-[0.97] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full h-14 bg-secondary text-secondary-foreground rounded-xl font-bold text-base active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {isSubmitting ? (
               <div className="h-5 w-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             ) : (
-              "Sacar agora"
+              "Confirmar saque"
             )}
           </button>
 
@@ -272,10 +280,10 @@ export default function Transfer() {
             disabled={isSubmitting}
             className="w-full text-muted-foreground font-medium text-sm py-2 hover:text-foreground transition-colors disabled:opacity-70"
           >
-            Alterar valor
+            Editar valor
           </button>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
