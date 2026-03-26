@@ -3,7 +3,6 @@ import {
   ArrowLeft, 
   Check,
   Info,
-  Wallet,
   X
 } from "lucide-react";
 import PixIcon from "@/components/PixIcon";
@@ -48,18 +47,13 @@ export default function Transfer() {
   };
 
   const totalDebited = parseFloat(amount.replace(/\./g, '').replace(',', '.')) || 0;
-  const fee = totalDebited * 0.10;
-  const netReceived = totalDebited - fee;
-  
   const fmt = (v: number) => v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-
   const isAmountValid = totalDebited > 0 && totalDebited <= balance;
 
   // ─── SUCCESS ───
   if (isSuccess) {
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
-        {/* Header */}
         <header className="px-6 pt-12 pb-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20">
           <button onClick={() => setLocation('/home')} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
             <X size={24} className="text-secondary" />
@@ -67,35 +61,24 @@ export default function Transfer() {
           <h1 className="text-xl font-bold text-secondary">Comprovante</h1>
         </header>
 
-        <div className="flex-1 flex flex-col px-5">
-          {/* Status icon */}
+        <div className="flex-1 flex flex-col px-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
               <Check size={20} strokeWidth={3} className="text-primary-foreground" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-foreground">Saque solicitado</h2>
-              <p className="text-sm text-muted-foreground">Em processamento</p>
+              <h2 className="text-lg font-bold text-foreground">Transferência solicitada</h2>
+              <p className="text-sm text-foreground font-semibold">Em processamento</p>
             </div>
           </div>
 
-          {/* Value */}
           <div className="mb-8">
             <p className="text-[40px] font-extrabold text-foreground leading-none">
-              R$ {fmt(netReceived)}
+              R$ {fmt(totalDebited)}
             </p>
           </div>
 
-          {/* Details list - Nubank receipt style */}
           <div className="space-y-0">
-            <div className="py-4 border-b border-border">
-              <p className="text-xs text-muted-foreground mb-0.5">Valor debitado</p>
-              <p className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</p>
-            </div>
-            <div className="py-4 border-b border-border">
-              <p className="text-xs text-muted-foreground mb-0.5">Taxa administrativa</p>
-              <p className="text-sm font-semibold text-destructive">- R$ {fmt(fee)}</p>
-            </div>
             <div className="py-4 border-b border-border">
               <p className="text-xs text-muted-foreground mb-0.5">Tipo</p>
               <div className="flex items-center gap-2">
@@ -107,6 +90,17 @@ export default function Transfer() {
               <p className="text-xs text-muted-foreground mb-0.5">Chave Pix · {pixLabel}</p>
               <p className="text-sm font-semibold text-foreground">{pixKey.value}</p>
             </div>
+            <div className="py-4 border-b border-border">
+              <p className="text-xs text-muted-foreground mb-0.5">Valor transferido</p>
+              <p className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</p>
+            </div>
+          </div>
+
+          <div className="flex gap-2 mt-5">
+            <Info size={14} className="text-muted-foreground/50 shrink-0 mt-0.5" />
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Você receberá uma notificação assim que o Pix for creditado na sua conta.
+            </p>
           </div>
 
           <div className="flex-1" />
@@ -127,28 +121,26 @@ export default function Transfer() {
   if (step === 1) {
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
-        {/* Header */}
         <header className="px-6 pt-12 pb-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20">
           <button onClick={() => setLocation('/home')} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
             <ArrowLeft size={24} className="text-secondary" />
           </button>
-          <h1 className="text-xl font-bold text-secondary">Sacar saldo</h1>
+          <h1 className="text-xl font-bold text-secondary">Transferir</h1>
         </header>
 
         <div className="flex-1 flex flex-col px-6">
-          {/* Pix destination - moved up */}
+          {/* Pix destination */}
           <div className="py-4 border-b border-border flex items-center gap-3 mb-6">
             <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
               <PixIcon size={18} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-muted-foreground">Receber via Pix · {pixLabel}</p>
+              <p className="text-xs text-muted-foreground">Transferir via Pix · {pixLabel}</p>
               <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
             </div>
           </div>
 
-          {/* Title */}
-          <h2 className="text-lg font-bold text-foreground mb-1">Qual o valor do saque?</h2>
+          <h2 className="text-lg font-bold text-foreground mb-1">Qual o valor?</h2>
           <p className="text-sm text-muted-foreground mb-8">
             Saldo disponível <span className="font-semibold text-foreground">R$ {fmt(balance)}</span>
           </p>
@@ -167,22 +159,9 @@ export default function Transfer() {
             />
           </div>
           
-          {/* Underline */}
           <div className={`h-0.5 rounded-full transition-colors duration-300 mb-4 ${
             totalDebited > 0 ? (totalDebited > balance ? 'bg-destructive' : 'bg-primary') : 'bg-border'
           }`} />
-
-          {/* Live fee preview */}
-          {totalDebited > 0 && totalDebited <= balance && (
-            <div className="animate-in fade-in slide-in-from-top-1 duration-200">
-              <p className="text-sm text-muted-foreground">
-                Você recebe <span className="font-bold text-foreground">R$ {fmt(netReceived)}</span>
-              </p>
-              <p className="text-xs text-muted-foreground/70 mt-0.5">
-                Taxa de 10% · R$ {fmt(fee)}
-              </p>
-            </div>
-          )}
 
           {totalDebited > balance && (
             <p className="text-sm text-destructive font-medium animate-in fade-in duration-200">
@@ -192,7 +171,6 @@ export default function Transfer() {
 
           <div className="flex-1" />
 
-          {/* CTA */}
           <div className="pb-8">
             <button 
               onClick={handleNextStep}
@@ -214,32 +192,22 @@ export default function Transfer() {
         <button onClick={() => setStep(1)} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
           <ArrowLeft size={24} className="text-secondary" />
         </button>
-        <h1 className="text-xl font-bold text-secondary">Revisar saque</h1>
+        <h1 className="text-xl font-bold text-secondary">Confirmar</h1>
       </header>
 
       <div className="flex-1 flex flex-col px-6">
-        <h2 className="text-lg font-bold text-foreground mb-1">Revise o saque</h2>
+        <h2 className="text-lg font-bold text-foreground mb-1">Revise a transferência</h2>
         <p className="text-sm text-muted-foreground mb-8">Confira os dados antes de confirmar</p>
 
-        {/* Amount */}
         <div className="mb-8">
-          <p className="text-xs text-muted-foreground mb-1">Valor a receber</p>
+          <p className="text-xs text-muted-foreground mb-1">Valor da transferência</p>
           <p className="text-[36px] font-extrabold text-foreground leading-none">
-            R$ {fmt(netReceived)}
+            R$ {fmt(totalDebited)}
           </p>
         </div>
 
-        {/* Details - vertical list Nubank-style */}
         <div className="space-y-0">
-          <div className="py-4 border-t border-border flex justify-between">
-            <span className="text-sm text-muted-foreground">Valor do saque</span>
-            <span className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</span>
-          </div>
-          <div className="py-4 border-t border-border flex justify-between">
-            <span className="text-sm text-muted-foreground">Taxa (10%)</span>
-            <span className="text-sm font-semibold text-destructive">- R$ {fmt(fee)}</span>
-          </div>
-          <div className="py-4 border-t border-border border-b flex items-center gap-3">
+          <div className="py-4 border-t border-border flex items-center gap-3">
             <div className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
               <PixIcon size={14} />
             </div>
@@ -248,9 +216,12 @@ export default function Transfer() {
               <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
             </div>
           </div>
+          <div className="py-4 border-t border-border border-b flex justify-between">
+            <span className="text-sm text-muted-foreground">Valor</span>
+            <span className="text-sm font-semibold text-foreground">R$ {fmt(totalDebited)}</span>
+          </div>
         </div>
 
-        {/* Info */}
         <div className="flex gap-2 mt-5 mb-auto">
           <Info size={14} className="text-muted-foreground/50 shrink-0 mt-0.5" />
           <p className="text-xs text-muted-foreground leading-relaxed">
@@ -258,7 +229,6 @@ export default function Transfer() {
           </p>
         </div>
 
-        {/* Actions */}
         <div className="pt-6 pb-8 space-y-3">
           <button 
             onClick={handleSubmit}
@@ -268,7 +238,7 @@ export default function Transfer() {
             {isSubmitting ? (
               <div className="h-5 w-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
             ) : (
-              "Confirmar saque"
+              "Transferir agora"
             )}
           </button>
 
