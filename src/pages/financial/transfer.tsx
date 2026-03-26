@@ -129,8 +129,8 @@ export default function Transfer() {
         </header>
 
         <div className="flex-1 flex flex-col px-6">
-          {/* Pix destination */}
-          <div className="py-4 border-b border-border flex items-center gap-3 mb-6">
+          {/* Pix destination card */}
+          <div className="bg-card rounded-xl border border-border p-4 flex items-center gap-3 mb-6">
             <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
               <PixIcon size={18} />
             </div>
