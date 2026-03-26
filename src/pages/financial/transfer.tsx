@@ -135,7 +135,7 @@ export default function Transfer() {
               <PixIcon size={18} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-muted-foreground">Transferir via Pix · {pixLabel}</p>
+              <p className="text-xs text-muted-foreground">Sua chave Pix · {pixLabel}</p>
               <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
             </div>
           </div>
