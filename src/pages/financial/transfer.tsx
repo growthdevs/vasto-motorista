@@ -60,10 +60,11 @@ export default function Transfer() {
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Header */}
-        <header className="px-5 pt-12 pb-4 flex items-center">
-          <button onClick={() => setLocation('/home')} className="p-2 -ml-2 text-foreground">
-            <X size={22} />
+        <header className="px-6 pt-12 pb-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20">
+          <button onClick={() => setLocation('/home')} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
+            <X size={24} className="text-secondary" />
           </button>
+          <h1 className="text-xl font-bold text-secondary">Comprovante</h1>
         </header>
 
         <div className="flex-1 flex flex-col px-5">
