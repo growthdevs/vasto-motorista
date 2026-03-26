@@ -127,23 +127,32 @@ export default function Transfer() {
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
         {/* Header */}
-        <header className="px-5 pt-12 pb-4 flex items-center">
-          <button 
-            onClick={() => setLocation('/home')}
-            className="p-2 -ml-2 text-foreground"
-          >
-            <ArrowLeft size={22} />
+        <header className="px-6 pt-12 pb-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20">
+          <button onClick={() => setLocation('/home')} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
+            <ArrowLeft size={24} className="text-secondary" />
           </button>
+          <h1 className="text-xl font-bold text-secondary">Sacar saldo</h1>
         </header>
 
-        <div className="flex-1 flex flex-col px-5">
+        <div className="flex-1 flex flex-col px-6">
+          {/* Pix destination - moved up */}
+          <div className="py-4 border-b border-border flex items-center gap-3 mb-6">
+            <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
+              <PixIcon size={18} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-muted-foreground">Receber via Pix · {pixLabel}</p>
+              <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
+            </div>
+          </div>
+
           {/* Title */}
-          <h1 className="text-xl font-bold text-foreground mb-1">Qual o valor do saque?</h1>
-          <p className="text-sm text-muted-foreground mb-10">
+          <h2 className="text-lg font-bold text-foreground mb-1">Qual o valor do saque?</h2>
+          <p className="text-sm text-muted-foreground mb-8">
             Saldo disponível <span className="font-semibold text-foreground">R$ {fmt(balance)}</span>
           </p>
 
-          {/* Amount input - Nubank big style */}
+          {/* Amount input */}
           <div className="flex items-baseline gap-1 mb-2">
             <span className="text-[32px] font-bold text-muted-foreground/25">R$</span>
             <input 
@@ -182,17 +191,6 @@ export default function Transfer() {
 
           <div className="flex-1" />
 
-          {/* Pix destination */}
-          <div className="py-4 border-t border-border flex items-center gap-3 mb-4">
-            <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-foreground shrink-0">
-              <PixIcon size={18} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs text-muted-foreground">Receber via Pix · {pixLabel}</p>
-              <p className="text-sm font-semibold text-foreground truncate">{pixKey.value}</p>
-            </div>
-          </div>
-
           {/* CTA */}
           <div className="pb-8">
             <button 
@@ -211,17 +209,15 @@ export default function Transfer() {
   // ─── STEP 2: CONFIRM ───
   return (
     <div className="min-h-screen bg-background font-sans flex flex-col">
-      <header className="px-5 pt-12 pb-4 flex items-center">
-        <button 
-          onClick={() => setStep(1)}
-          className="p-2 -ml-2 text-foreground"
-        >
-          <ArrowLeft size={22} />
+      <header className="px-6 pt-12 pb-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20">
+        <button onClick={() => setStep(1)} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
+          <ArrowLeft size={24} className="text-secondary" />
         </button>
+        <h1 className="text-xl font-bold text-secondary">Revisar saque</h1>
       </header>
 
-      <div className="flex-1 flex flex-col px-5">
-        <h1 className="text-xl font-bold text-foreground mb-1">Revise o saque</h1>
+      <div className="flex-1 flex flex-col px-6">
+        <h2 className="text-lg font-bold text-foreground mb-1">Revise o saque</h2>
         <p className="text-sm text-muted-foreground mb-8">Confira os dados antes de confirmar</p>
 
         {/* Amount */}
