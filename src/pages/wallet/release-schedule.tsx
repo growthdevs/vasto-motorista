@@ -55,27 +55,29 @@ export default function ReleaseSchedule() {
           <h3 className="font-bold text-lg text-secondary mb-4">Aguardando liberação</h3>
           <div className="space-y-3">
             {pendingItems.map((item) => (
-              <div key={item.id} className="bg-muted rounded-2xl p-4 border border-border">
-                {/* Row 1: Icon + Route info + Value */}
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center shrink-0">
-                    <Clock size={18} className="text-primary" />
+              <div key={item.id} className="bg-muted rounded-2xl border border-border overflow-hidden">
+                {/* Top: Full-width header with value */}
+                <div className="px-4 pt-4 pb-3 flex items-start justify-between">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="h-7 w-7 rounded-full bg-accent flex items-center justify-center shrink-0">
+                        <Clock size={14} className="text-primary" />
+                      </div>
+                      <p className="text-sm font-bold text-secondary">{item.id}</p>
+                    </div>
+                    <p className="text-xs text-muted-foreground ml-9">{item.carrier}</p>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-secondary truncate">{item.id}</p>
-                    <p className="text-xs text-muted-foreground truncate">{item.carrier}</p>
-                  </div>
-                  <p className="text-base font-bold text-secondary whitespace-nowrap">{formatCurrency(item.value)}</p>
+                  <p className="text-lg font-bold text-secondary whitespace-nowrap">{formatCurrency(item.value)}</p>
                 </div>
 
-                {/* Row 2: Date + Antecipar button */}
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
-                  <span className="text-xs text-muted-foreground">
-                    Disponível em <span className="font-bold text-secondary">{item.daysLeft} dias</span> {item.date}
+                {/* Bottom bar: Date + Action */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-secondary/5 border-t border-border">
+                  <span className="text-[11px] text-muted-foreground">
+                    Disponível em <span className="font-bold text-secondary">{item.daysLeft} dias</span> · {item.date}
                   </span>
                   <Link href={`/wallet/anticipate?freight=${item.id}`}>
-                    <button className="text-xs font-bold text-primary bg-secondary px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
-                      <Zap size={12} /> Antecipar
+                    <button className="text-[11px] font-bold text-primary bg-secondary px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+                      <Zap size={11} /> Antecipar
                     </button>
                   </Link>
                 </div>
