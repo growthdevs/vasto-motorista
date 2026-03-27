@@ -58,22 +58,17 @@ export default function Transfer() {
           <button onClick={() => setLocation('/home')} className="p-2 -ml-2 rounded-full hover:bg-muted transition-colors">
             <X size={24} className="text-secondary" />
           </button>
-          <h1 className="text-xl font-bold text-secondary">Comprovante</h1>
+          <h1 className="text-xl font-bold text-secondary">Em processamento</h1>
         </header>
 
-        <div className="flex-1 flex flex-col px-6">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center">
-              <Check size={20} strokeWidth={3} className="text-primary-foreground" />
+        <div className="flex-1 flex flex-col px-6 items-center">
+          <div className="flex flex-col items-center text-center mt-6 mb-8">
+            <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 animate-pulse">
+              <PixIcon size={28} className="text-primary" />
             </div>
-            <div>
-              <h2 className="text-lg font-bold text-foreground">Transferência solicitada</h2>
-              <p className="text-sm text-foreground font-semibold">Em processamento</p>
-            </div>
-          </div>
-
-          <div className="mb-8">
-            <p className="text-[40px] font-extrabold text-foreground leading-none">
+            <h2 className="text-lg font-bold text-foreground mb-1">Transferência solicitada</h2>
+            <p className="text-sm text-foreground font-semibold mb-4">Em processamento</p>
+            <p className="text-[36px] font-extrabold text-foreground leading-none">
               R$ {fmt(totalDebited)}
             </p>
           </div>
