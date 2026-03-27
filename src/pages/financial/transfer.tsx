@@ -61,13 +61,18 @@ export default function Transfer() {
           <h1 className="text-xl font-bold text-secondary">Em processamento</h1>
         </header>
 
-        <div className="flex-1 flex flex-col px-6 items-center">
-          <div className="flex flex-col items-center text-center mt-6 mb-8">
-            <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 animate-pulse">
-              <PixIcon size={28} className="text-primary" />
+        <div className="flex-1 flex flex-col px-6">
+          <div className="flex flex-col items-center text-center mb-6">
+            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center shrink-0">
+              <Check size={20} strokeWidth={3} className="text-primary-foreground" />
             </div>
-            <h2 className="text-lg font-bold text-foreground mb-1">Transferência solicitada</h2>
-            <p className="text-sm text-foreground font-semibold mb-4">Em processamento</p>
+            <div className="mt-3">
+              <h2 className="text-lg font-bold text-foreground">Transferência solicitada</h2>
+              <p className="text-sm text-muted-foreground font-semibold">Em processamento</p>
+            </div>
+          </div>
+
+          <div className="mb-8 text-center">
             <p className="text-[36px] font-extrabold text-foreground leading-none">
               R$ {fmt(totalDebited)}
             </p>
