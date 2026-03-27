@@ -56,7 +56,7 @@ export default function ReleaseSchedule() {
           <div className="space-y-3">
             {pendingItems.map((item) => (
               <div key={item.id} className="bg-muted rounded-2xl p-4 border border-border">
-                <div className="flex items-center gap-3 mb-3">
+                <div className="flex items-center gap-3">
                   <div className="h-10 w-10 rounded-full bg-accent flex items-center justify-center shrink-0">
                     <Clock size={18} className="text-primary" />
                   </div>
@@ -64,19 +64,19 @@ export default function ReleaseSchedule() {
                     <p className="text-sm font-bold text-secondary">{item.id}</p>
                     <p className="text-xs text-muted-foreground truncate">{item.carrier}</p>
                   </div>
-                  <div className="text-right">
+                  <div className="flex items-center gap-2">
                     <p className="text-base font-bold text-secondary">{formatCurrency(item.value)}</p>
+                    <Link href={`/wallet/anticipate?freight=${item.id}`}>
+                      <button className="text-xs font-bold text-primary bg-secondary px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+                        <Zap size={12} /> Antecipar
+                      </button>
+                    </Link>
                   </div>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="mt-3 pt-3 border-t border-border">
                   <span className="text-xs text-muted-foreground">
-                    Disponível em <span className="font-bold text-secondary">{item.daysLeft} dias</span> • {item.date}
+                    Disponível em <span className="font-bold text-secondary">{item.daysLeft} dias</span> {item.date}
                   </span>
-                  <Link href={`/wallet/anticipate?freight=${item.id}`}>
-                    <button className="text-xs font-bold text-primary bg-secondary px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
-                      <Zap size={12} /> Antecipar
-                    </button>
-                  </Link>
                 </div>
               </div>
             ))}
