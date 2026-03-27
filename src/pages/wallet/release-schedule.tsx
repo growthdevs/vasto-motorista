@@ -55,7 +55,7 @@ export default function ReleaseSchedule() {
           <h3 className="font-bold text-lg text-secondary mb-4">Aguardando liberação</h3>
           <div className="space-y-3">
             {pendingItems.map((item) => (
-              <div key={item.id} className="bg-muted rounded-2xl border border-border overflow-hidden">
+              <div key={item.id} className="bg-background rounded-2xl border border-border overflow-hidden">
                 {/* Top: Full-width header with value */}
                 <div className="px-4 pt-4 pb-3 flex items-start justify-between">
                   <div className="min-w-0">
