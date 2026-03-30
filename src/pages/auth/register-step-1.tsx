@@ -196,6 +196,14 @@ export default function RegisterStep1() {
           </button>
         </form>
       </div>
+
+      {/* Email Verification Modal */}
+      <EmailVerificationModal
+        open={showEmailModal}
+        email={email}
+        onClose={() => setShowEmailModal(false)}
+        onVerified={handleEmailVerified}
+      />
     </div>
   );
 }
