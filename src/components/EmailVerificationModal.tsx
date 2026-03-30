@@ -158,18 +158,15 @@ export default function EmailVerificationModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-
-      {/* Modal */}
-      <div className="relative w-full sm:max-w-md bg-white rounded-t-2xl sm:rounded-2xl p-6 pb-8 animate-in slide-in-from-bottom duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
+      {/* Fullscreen container */}
+      <div className="relative w-full h-full bg-background p-6 flex flex-col justify-center animate-in fade-in duration-300">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
         >
-          <X size={20} className="text-gray-500" />
+          <X size={20} className="text-muted-foreground" />
         </button>
 
         {/* Header */}
