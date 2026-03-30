@@ -164,9 +164,9 @@ export default function EmailVerificationModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-muted"
         >
-          <X size={20} className="text-gray-500" />
+          <X size={20} className="text-muted-foreground" />
         </button>
 
         {/* Header */}
