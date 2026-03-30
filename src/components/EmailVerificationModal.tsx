@@ -158,7 +158,7 @@ export default function EmailVerificationModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-background">
       {/* Fullscreen container */}
       <div className="relative w-full h-full bg-background p-6 flex flex-col justify-center animate-in fade-in duration-300">
         {/* Close button */}
