@@ -2,21 +2,29 @@ import { Link, useLocation } from "wouter";
 import { ArrowLeft, Check, Eye, EyeOff, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import EmailVerificationModal from "@/components/EmailVerificationModal";
 
 export default function RegisterStep1() {
   const [, setLocation] = useLocation();
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
 
   const handleRegister = async () => {
+    if (!email || !email.includes("@")) {
+      toast.error("Informe um email válido.");
+      return;
+    }
+
     if (name.toLowerCase().includes("erro")) {
       toast.error("Erro ao criar cadastro. Tente novamente.", {
         duration: 3000,
         style: {
-          backgroundColor: "#ef4444", // Red-500
+          backgroundColor: "#ef4444",
           color: "white",
           border: "none",
           fontSize: "16px",
@@ -30,22 +38,14 @@ export default function RegisterStep1() {
       return;
     }
 
-    if (name.toLowerCase().includes("sucesso")) {
-      setIsLoading(true);
-      // Simulate API call
-      setTimeout(() => {
-        setIsLoading(false);
-        setShowSuccess(true);
-      }, 2000);
-      return;
-    }
+    // Open email verification modal
+    setShowEmailModal(true);
+  };
 
-    // Default behavior if neither (optional, maybe just show generic success for testing)
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      setShowSuccess(true);
-    }, 2000);
+  const handleEmailVerified = () => {
+    setShowEmailModal(false);
+    // Navigate to step 2 (address)
+    setLocation("/register/step-2");
   };
 
   if (showSuccess) {
@@ -128,7 +128,19 @@ export default function RegisterStep1() {
             />
           </div>
           
-           <div className="space-y-1">
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700 ml-1">Email</label>
+            <input
+              type="email"
+              placeholder="seu@email.com"
+              className="input-ionic w-full"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              data-testid="input-email"
+            />
+          </div>
+
+          <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700 ml-1">Placa do Veículo</label>
             <input
               type="text"
@@ -184,6 +196,14 @@ export default function RegisterStep1() {
           </button>
         </form>
       </div>
+
+      {/* Email Verification Modal */}
+      <EmailVerificationModal
+        open={showEmailModal}
+        email={email}
+        onClose={() => setShowEmailModal(false)}
+        onVerified={handleEmailVerified}
+      />
     </div>
   );
 }
