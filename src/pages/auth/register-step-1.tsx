@@ -128,7 +128,19 @@ export default function RegisterStep1() {
             />
           </div>
           
-           <div className="space-y-1">
+          <div className="space-y-1">
+            <label className="text-sm font-medium text-gray-700 ml-1">Email</label>
+            <input
+              type="email"
+              placeholder="seu@email.com"
+              className="input-ionic w-full"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              data-testid="input-email"
+            />
+          </div>
+
+          <div className="space-y-1">
             <label className="text-sm font-medium text-gray-700 ml-1">Placa do Veículo</label>
             <input
               type="text"
