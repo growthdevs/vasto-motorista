@@ -204,15 +204,6 @@ export default function Profile() {
                 </div>
               </Link>
 
-               <div className="p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group">
-                  <div className="flex items-center gap-4">
-                     <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-red-600 shrink-0 group-hover:bg-red-100 transition-colors">
-                        <LogOut size={20} />
-                     </div>
-                     <span className="text-sm font-bold text-red-600">Sair da conta</span>
-                  </div>
-               </div>
-
                {/* Outras opções - expandable */}
                <button
                  onClick={() => setShowOtherOptions(!showOtherOptions)}
@@ -228,18 +219,29 @@ export default function Profile() {
                </button>
 
                {showOtherOptions && (
-                 <button
-                   onClick={() => setShowCloseAccount(true)}
-                   className="w-full p-4 pl-18 flex items-center justify-between hover:bg-gray-100 transition-colors cursor-pointer group"
-                 >
-                    <div className="flex items-center gap-4">
-                       <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-secondary shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <UserX size={20} />
-                       </div>
-                       <span className="text-sm font-bold text-secondary">Encerrar minha conta</span>
-                    </div>
-                    <ChevronRight size={20} className="text-gray-400" />
-                 </button>
+                 <>
+                   <button
+                     onClick={() => setShowCloseAccount(true)}
+                     className="w-full p-4 pl-18 flex items-center justify-between hover:bg-gray-100 transition-colors cursor-pointer group"
+                   >
+                      <div className="flex items-center gap-4">
+                         <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-secondary shrink-0 group-hover:bg-primary/20 transition-colors">
+                            <UserX size={20} />
+                         </div>
+                         <span className="text-sm font-bold text-secondary">Encerrar minha conta</span>
+                      </div>
+                      <ChevronRight size={20} className="text-gray-400" />
+                   </button>
+
+                   <div className="p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group">
+                      <div className="flex items-center gap-4">
+                         <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-red-600 shrink-0 group-hover:bg-red-100 transition-colors">
+                            <LogOut size={20} />
+                         </div>
+                         <span className="text-sm font-bold text-red-600">Sair da conta</span>
+                      </div>
+                   </div>
+                 </>
                )}
              </div>
             
