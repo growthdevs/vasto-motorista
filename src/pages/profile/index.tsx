@@ -11,9 +11,12 @@ import {
   ShieldCheck,
   CreditCard,
   Truck,
-  Settings
+  Settings,
+  AlertTriangle,
+  UserX
 } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Profile() {
   const [, setLocation] = useLocation();
