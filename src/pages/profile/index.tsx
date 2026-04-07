@@ -20,6 +20,27 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function Profile() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const [showCloseAccount, setShowCloseAccount] = useState(false);
+
+  // Mock: saldo disponível para saque
+  const mockBalance = 0;
+
+  const handleCloseAccount = () => {
+    if (mockBalance > 0) {
+      toast({
+        variant: "destructive",
+        title: "Não é possível encerrar",
+        description: "Você possui saldo disponível para saque. Realize o saque antes de encerrar sua conta.",
+      });
+      setShowCloseAccount(false);
+      return;
+    }
+    console.log("Conta encerrada (mock)");
+    toast({ description: "Sua conta foi encerrada com sucesso." });
+    setShowCloseAccount(false);
+    setLocation("/");
+  };
 
   // Mock user data
   const user = {
