@@ -13,7 +13,8 @@ import {
   Truck,
   Settings,
   AlertTriangle,
-  UserX
+  UserX,
+  ChevronDown
 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -22,6 +23,7 @@ export default function Profile() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [showCloseAccount, setShowCloseAccount] = useState(false);
+  const [showOtherOptions, setShowOtherOptions] = useState(false);
 
   // Mock: saldo disponível para saque
   const mockBalance = 0;
@@ -202,31 +204,44 @@ export default function Profile() {
                 </div>
               </Link>
 
-              <div className="p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group">
-                 <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-red-600 shrink-0 group-hover:bg-red-100 transition-colors">
-                       <LogOut size={20} />
-                    </div>
-                    <span className="text-sm font-bold text-red-600">Sair da conta</span>
-                 </div>
-              </div>
-            </div>
+               <div className="p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group">
+                  <div className="flex items-center gap-4">
+                     <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-red-600 shrink-0 group-hover:bg-red-100 transition-colors">
+                        <LogOut size={20} />
+                     </div>
+                     <span className="text-sm font-bold text-red-600">Sair da conta</span>
+                  </div>
+               </div>
 
-            {/* Encerrar Conta */}
-            <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 mt-4">
-               <button 
-                 onClick={() => setShowCloseAccount(true)}
-                 className="w-full p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group"
+               {/* Outras opções - expandable */}
+               <button
+                 onClick={() => setShowOtherOptions(!showOtherOptions)}
+                 className="w-full p-4 flex items-center justify-between hover:bg-gray-100 transition-colors cursor-pointer group"
                >
                   <div className="flex items-center gap-4">
-                     <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-destructive shrink-0 group-hover:bg-red-100 transition-colors">
-                        <UserX size={20} />
+                     <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-secondary shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <Settings size={20} />
                      </div>
-                     <span className="text-sm font-bold text-destructive">Encerrar minha conta</span>
+                     <span className="text-sm font-bold text-secondary">Outras opções</span>
                   </div>
-                  <ChevronRight size={20} className="text-gray-400" />
+                  <ChevronDown size={20} className={`text-gray-400 transition-transform duration-200 ${showOtherOptions ? 'rotate-180' : ''}`} />
                </button>
-            </div>
+
+               {showOtherOptions && (
+                 <button
+                   onClick={() => setShowCloseAccount(true)}
+                   className="w-full p-4 pl-18 flex items-center justify-between hover:bg-gray-100 transition-colors cursor-pointer group"
+                 >
+                    <div className="flex items-center gap-4">
+                       <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-secondary shrink-0 group-hover:bg-primary/20 transition-colors">
+                          <UserX size={20} />
+                       </div>
+                       <span className="text-sm font-bold text-secondary">Encerrar minha conta</span>
+                    </div>
+                    <ChevronRight size={20} className="text-gray-400" />
+                 </button>
+               )}
+             </div>
             
             <p className="text-center text-xs text-gray-400 pt-4">
                Versão 1.0.0 (Beta)
