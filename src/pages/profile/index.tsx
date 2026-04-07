@@ -210,14 +210,76 @@ export default function Profile() {
                     <span className="text-sm font-bold text-red-600">Sair da conta</span>
                  </div>
               </div>
-           </div>
-           
-           <p className="text-center text-xs text-gray-400 pt-4">
-              Versão 1.0.0 (Beta)
-           </p>
-        </section>
+            </div>
+
+            {/* Encerrar Conta */}
+            <div className="bg-gray-50 rounded-2xl overflow-hidden border border-gray-100 mt-4">
+               <button 
+                 onClick={() => setShowCloseAccount(true)}
+                 className="w-full p-4 flex items-center justify-between hover:bg-red-50 transition-colors cursor-pointer group"
+               >
+                  <div className="flex items-center gap-4">
+                     <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center text-destructive shrink-0 group-hover:bg-red-100 transition-colors">
+                        <UserX size={20} />
+                     </div>
+                     <span className="text-sm font-bold text-destructive">Encerrar minha conta</span>
+                  </div>
+                  <ChevronRight size={20} className="text-gray-400" />
+               </button>
+            </div>
+            
+            <p className="text-center text-xs text-gray-400 pt-4">
+               Versão 1.0.0 (Beta)
+            </p>
+         </section>
 
       </main>
+
+      {/* Fullscreen Close Account Confirmation */}
+      {showCloseAccount && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-background animate-in fade-in duration-300">
+          <header className="px-6 pt-12 pb-4 border-b border-gray-100">
+            <div className="flex items-center gap-4">
+              <button 
+                onClick={() => setShowCloseAccount(false)}
+                className="p-2 -ml-2 hover:bg-muted rounded-full transition-colors text-secondary"
+              >
+                <ArrowLeft size={24} />
+              </button>
+              <h1 className="text-xl font-bold text-secondary">Encerrar Conta</h1>
+            </div>
+          </header>
+
+          <div className="flex-1 flex flex-col items-center justify-center px-8 text-center">
+            <div className="h-20 w-20 rounded-full bg-destructive/10 flex items-center justify-center mb-6">
+              <AlertTriangle size={40} className="text-destructive" />
+            </div>
+
+            <h2 className="text-2xl font-bold text-secondary mb-3">Tem certeza?</h2>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-2">
+              Ao encerrar sua conta, <strong className="text-secondary">todos os seus dados serão permanentemente removidos</strong> e essa ação não poderá ser desfeita.
+            </p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-8">
+              Você só poderá encerrar sua conta se <strong className="text-secondary">não possuir saldo disponível para saque</strong>.
+            </p>
+
+            <div className="w-full space-y-3 max-w-xs">
+              <button
+                onClick={handleCloseAccount}
+                className="w-full py-4 rounded-2xl bg-destructive text-destructive-foreground font-bold text-sm active:scale-[0.98] transition-transform"
+              >
+                Encerrar minha conta
+              </button>
+              <button
+                onClick={() => setShowCloseAccount(false)}
+                className="w-full py-4 rounded-2xl bg-muted text-secondary font-bold text-sm active:scale-[0.98] transition-transform"
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
